@@ -42,7 +42,10 @@ class LoginPage extends Component {
 		}
 	}
 	handleInput = event => {
-		newLoginData[event.target.name] = event.target.value
+		const newLoginData = {}
+		if (!Object.prototype.hasOwnProperty.call(newLoginData, event.target.name)) {
+			newLoginData[event.target.name] = event.target.value
+		}
 		console.log(newLoginData)
 		this.setState({
 			loginData: newLoginData
