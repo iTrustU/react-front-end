@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Input, Label, Button, Icon } from 'semantic-ui-react'
-import { Container, FormContainer, WelcomeHeader, InputContainer } from './components/StyledComponents'
+import { Container, FormContainer, WelcomeHeader, InputContainer } from '../components/StyledComponents'
+import { Link } from 'react-router-dom'
 
 class SignIn extends Component {
 	state = {
@@ -25,7 +26,7 @@ class SignIn extends Component {
 				<h1>logo</h1>
 				<FormContainer>
 					<WelcomeHeader>
-						<h3>login to ITrustU</h3>
+						<h3>Sign in to ITrustU</h3>
 					</WelcomeHeader>
 					<InputContainer>
 						<label>Email</label>
@@ -58,7 +59,7 @@ class SignIn extends Component {
 						</Button>
 					</InputContainer>
 					<WelcomeHeader>
-						<p>dont have account register</p>
+						<p>Dont have account <Link to="/signup">Register here</Link></p>
 					</WelcomeHeader>
 				</FormContainer>
 			</Container>
