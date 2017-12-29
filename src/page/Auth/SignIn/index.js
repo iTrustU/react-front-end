@@ -59,7 +59,7 @@ class SignIn extends Component {
 						</Button>
 					</InputContainer>
 					<WelcomeHeader>
-						<p>Dont have account <Link to="/signup">Register here</Link></p>
+						<p>Dont have account? <Link to="/signup">Register here</Link></p>
 					</WelcomeHeader>
 				</FormContainer>
 			</Container>

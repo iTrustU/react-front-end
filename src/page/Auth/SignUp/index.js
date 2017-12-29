@@ -35,12 +35,18 @@ class SignUp extends Component {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<Button fluid>Login</Button>
+						<label>Full Name</label>
+						<Input
+							name="fullname"
+							type="text"
+							fluid
+							focus
+							placeholder="Full Name"
+							onChange={this.handleInput}
+						/>
 					</InputContainer>
 					<InputContainer>
-						<Button fluid>
-							<Icon name="google" />login with google
-						</Button>
+						<Button fluid>Sign Up</Button>
 					</InputContainer>
 					<WelcomeHeader>
 						<p>Have ITrustU account? <Link to="/signin">Login here</Link></p>
