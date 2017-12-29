@@ -17,7 +17,7 @@ const FormContainer = styled.div`
 	align-items: center;
 `
 
-const WellcomeHeader = styled.div`
+const WelcomeHeader = styled.div`
 	background-color: #124aa5;
 	height: 50px;
 	display: flex;
@@ -56,9 +56,9 @@ class LoginPage extends Component {
 			<Container>
 				<h1>logo</h1>
 				<FormContainer>
-					<WellcomeHeader>
+					<WelcomeHeader>
 						<h3>login to ITrustU</h3>
-					</WellcomeHeader>
+					</WelcomeHeader>
 					<InputContainer>
 						<label>Email</label>
 						<Input
@@ -87,9 +87,9 @@ class LoginPage extends Component {
 							<Icon name="google" />login with google
 						</Button>
 					</InputContainer>
-					<WellcomeHeader>
+					<WelcomeHeader>
 						<p>dont have account register</p>
-					</WellcomeHeader>
+					</WelcomeHeader>
 				</FormContainer>
 			</Container>
 		)
