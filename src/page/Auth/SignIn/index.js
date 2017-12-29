@@ -11,14 +11,13 @@ class SignIn extends Component {
 	}
 
 	handleInput = event => {
-		const newLoginData = {}
-		if (!Object.prototype.hasOwnProperty.call(newLoginData, event.target.name)) {
-			newLoginData[event.target.name] = event.target.value
-		}
-		console.log(newLoginData)
 		this.setState({
-			loginData: newLoginData
-		})
+			...this.state.loginData,
+			loginData: {
+				...this.state.loginData,
+				[event.target.name]: event.target.value
+			}
+		}, () => console.log(this.state.loginData))
 	}
 	render() {
 		return (
@@ -32,6 +31,7 @@ class SignIn extends Component {
 						<label>Email</label>
 						<Input
 							name="email"
+							type="email"
 							fluid
 							focus
 							placeholder="Email"
@@ -42,6 +42,7 @@ class SignIn extends Component {
 						<label>Password</label>
 						<Input
 							name="password"
+							type="password"
 							fluid
 							focus
 							placeholder="Password"
