@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import LoginPage from './page/Auth/SignIn';
 import {
   BrowserRouter as Router,
   Route,

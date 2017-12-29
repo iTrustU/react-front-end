@@ -1,9 +1,51 @@
 import React, { Component } from 'react'
 import { Input, Label, Button, Icon } from 'semantic-ui-react'
-import { Container, FormContainer, WelcomeHeader, InputContainer } from '../components/StyledComponents'
+import {
+	Container,
+	FormContainer,
+	WelcomeHeader,
+	InputContainer
+} from '../components/StyledComponents'
 import { Link } from 'react-router-dom'
+import firebase from '../../../fire'
 
 class SignUp extends Component {
+	state = {
+		loginData: {
+			email: '',
+			password: '',
+			fullname: ''
+		}
+	}
+
+	handleInput = event => {
+		this.setState(
+			{
+				...this.state.loginData,
+				loginData: {
+					...this.state.loginData,
+					[event.target.name]: event.target.value
+				}
+			}
+		)
+	}
+	onSingUp = () => {
+		firebase
+			.auth()
+			.createUserWithEmailAndPassword(this.state.email, this.state.password)
+			.then(succ => {
+				firebase.auth().currentUser.updateProfile({
+					displayName:this.state.fullname,
+				})
+			})
+			.catch(error => {
+				// Handle Errors here.
+				console.log(error.message)
+				var errorCode = error.code
+				var errorMessage = error.message
+				// ...
+			})
+	}
 	render() {
 		return (
 			<Container>
@@ -46,10 +88,14 @@ class SignUp extends Component {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<Button fluid>Sign Up</Button>
+						<Button fluid onClick={this.onSingUp}>
+							Sign Up
+						</Button>
 					</InputContainer>
 					<WelcomeHeader>
-						<p>Have ITrustU account? <Link to="/signin">Login here</Link></p>
+						<p>
+							Have ITrustU account? <Link to="/signin">Login here</Link>
+						</p>
 					</WelcomeHeader>
 				</FormContainer>
 			</Container>

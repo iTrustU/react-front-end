@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import { Input, Label, Button, Icon } from 'semantic-ui-react'
-import { Container, FormContainer, WelcomeHeader, InputContainer } from '../components/StyledComponents'
+import {
+	Container,
+	FormContainer,
+	WelcomeHeader,
+	InputContainer
+} from '../components/StyledComponents'
 import { Link } from 'react-router-dom'
+import firebase from '../../../fire'
 
 class SignIn extends Component {
 	state = {
@@ -12,13 +18,27 @@ class SignIn extends Component {
 	}
 
 	handleInput = event => {
-		this.setState({
-			...this.state.loginData,
-			loginData: {
+		this.setState(
+			{
 				...this.state.loginData,
-				[event.target.name]: event.target.value
-			}
-		}, () => console.log(this.state.loginData))
+				loginData: {
+					...this.state.loginData,
+					[event.target.name]: event.target.value
+				}
+			})
+	}
+
+	onLogin = event => {
+		if (event.target.name === 'email') {
+			firebase
+				.auth()
+				.signInWithEmailAndPassword(this.state.email, this.state.password)
+				.catch(function(error) {
+					alert(error.message)
+				})
+		} else {
+			// var id_token = googleUser.getAuthResponse().id_token
+		}
 	}
 	render() {
 		return (
@@ -51,15 +71,19 @@ class SignIn extends Component {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<Button fluid>Login</Button>
+						<Button fluid name="email" onClick={this.onLogin}>
+							Login
+						</Button>
 					</InputContainer>
 					<InputContainer>
-						<Button fluid>
+						<Button fluid name="google" onClick={this.onLogin}>
 							<Icon name="google" />login with google
 						</Button>
 					</InputContainer>
 					<WelcomeHeader>
-						<p>Dont have account? <Link to="/signup">Register here</Link></p>
+						<p>
+							Dont have account? <Link to="/signup">Register here</Link>
+						</p>
 					</WelcomeHeader>
 				</FormContainer>
 			</Container>
