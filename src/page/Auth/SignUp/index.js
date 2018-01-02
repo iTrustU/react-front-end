@@ -7,7 +7,7 @@ import {
 	InputContainer
 } from '../components/StyledComponents'
 import { Link } from 'react-router-dom'
-import firebase from '../../../fire'
+import firebase from '../../../utils/firebase'
 
 class SignUp extends Component {
 	state = {
