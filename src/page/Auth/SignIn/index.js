@@ -6,16 +6,15 @@ import {
 	WelcomeHeader,
 	InputContainer
 } from '../components/StyledComponents'
-import { Link, Redirect } from 'react-router-dom'
-import firebase from '../../../utils/firebase'
-
+import { connect } from 'react-redux'
+import { loginHandler, updateIsAuthenticated } from '../../../actions'
+import { Link, Redirect, withRouter } from 'react-router-dom'
 class SignIn extends Component {
 	state = {
 		loginData: {
 			email: '',
 			password: ''
-		},
-		loginSucced: false
+		}
 	}
 
 	handleInput = event => {
@@ -31,42 +30,11 @@ class SignIn extends Component {
 			})
 	}
 
-	onLogin = event => {
-		const { name, value } = event.target
-		const { email, password } = this.state.loginData
-		if (name === 'email') {
-			firebase
-				.auth()
-				.signInWithEmailAndPassword(email, password)
-				.then(() => this.setState({ loginSucced: true }))
-				.catch(function(error) {
-					alert(error.message)
-				})
-		} else if (name === 'facebook') {
-			const facebookProvider = new firebase.auth.FacebookAuthProvider()
-			firebase
-				.auth()
-				.signInWithPopup(facebookProvider)
-				.then(function(result) {
-					var token = result.credential.accessToken;
-					var user = result.user;
-					localStorage.setItem('login', `${token}.${user}`)
-					console.log(token, user)
-				})
-				.catch(function(error) {
-					const errorCode = error.code,
-								errorMessage = error.message,
-								email = error.email
-					console.log(errorCode, errorMessage, email)
-				})
-		}
-	}
 	render() {
-		if (this.state.loginSucced) {
-			return <Redirect to='/404' />
-		}
 		return (
-			<Container>
+			this.props.isAuthenticated 
+			? <Redirect to='/dashboard' />
+			: (<Container>
 				<h1>logo</h1>
 				<FormContainer>
 					<WelcomeHeader>
@@ -95,12 +63,12 @@ class SignIn extends Component {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<Button fluid name="email" onClick={this.onLogin}>
+						<Button fluid name="email" onClick={event => this.props.dispath(loginHandler(event))}>
 							Login
 						</Button>
 					</InputContainer>
 					<InputContainer>
-						<Button fluid name="facebook" onClick={this.onLogin}>
+						<Button fluid name="facebook" onClick={event => this.props.dispatch(loginHandler(event))}>
 							<Icon name="facebook" />login with Facebook
 						</Button>
 					</InputContainer>
@@ -110,9 +78,14 @@ class SignIn extends Component {
 						</p>
 					</WelcomeHeader>
 				</FormContainer>
-			</Container>
+			</Container>)
 		)
 	}
 }
+const mapStateToProps = (state) => {
+	return {
+		isAuthenticated: state.authReducer.isAuthenticated
+	}
+}
 
-export default SignIn
+export default connect(mapStateToProps)(SignIn)
