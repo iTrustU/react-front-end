@@ -16,15 +16,27 @@ export const storeUserData = (userData) => ({
   }
 })
 
-export const loginHandler = event => dispatch => {
+export const signOutHandler = (browserHistory) => dispatch => {
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      dispatch(updateIsAuthenticated(false, {}, browserHistory))
+    })
+    .catch((err) => {
+      console.log('ERROR AT SIGN OUT HANDLER', err)
+    })
+}
+
+export const loginHandler = (event, loginData = {}) => dispatch => {
   const { name } = event.target
-  const { email, password } = this.state.loginData
+  const { email, password } = loginData
   if (name === 'email') {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        dispatch(updateIsAuthenticated(true))
+      .then(userData => {
+        dispatch(updateIsAuthenticated(!!userData, userData))
       })
       .catch(error => {
         console.log(error.message, 'ERROR ON LOGIN HANDLER')
@@ -43,13 +55,22 @@ export const loginHandler = event => dispatch => {
   }
 }
 
-export const updateIsAuthenticated = (isAuthenticated, userData = null) => (dispatch) => {
+export const updateIsAuthenticated = (isAuthenticated, userData = {}, browserHistory = null) => (dispatch) => {
   if (isAuthenticated) {
     dispatch(authenticateSuccess())
     dispatch(storeUserData(userData))
-    dispatch(push('/dashboard'))
+    if (browserHistory) {
+      browserHistory.push('/dashboard')
+    } else {
+      dispatch(push('/dashboard'))
+    }
   } else {
     dispatch(authenticateFail())
-    dispatch(push('/signin'))
+    dispatch(storeUserData(userData))
+    if (browserHistory) {
+      browserHistory.push('/')
+    } else {
+      dispatch(push('/'))
+    }
   }
 }

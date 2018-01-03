@@ -63,7 +63,7 @@ class SignIn extends Component {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<Button fluid name="email" onClick={event => this.props.dispath(loginHandler(event))}>
+						<Button fluid name="email" onClick={event => this.props.dispatch(loginHandler(event, this.state.loginData))}>
 							Login
 						</Button>
 					</InputContainer>
@@ -88,4 +88,4 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default connect(mapStateToProps)(SignIn)
+export default withRouter(connect(mapStateToProps)(SignIn))
