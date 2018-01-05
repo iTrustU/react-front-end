@@ -8,13 +8,19 @@ import {
 } from '../components/StyledComponents'
 import { Link } from 'react-router-dom'
 import firebase from '../../../utils/firebase'
+import { post as servicePost} from '../../../service'
 
 class SignUp extends Component {
 	state = {
 		loginData: {
 			email: '',
 			password: '',
-			fullname: ''
+			name: '',
+			address:'',
+			location:{
+				lat: -6.121435,
+				lng: 106.774124,
+			}
 		}
 	}
 
@@ -30,12 +36,20 @@ class SignUp extends Component {
 		)
 	}
 	onSingUp = () => {
+		const {
+			email,
+			password,
+			name,
+			address,
+			location
+		} = this.state
 		firebase
 			.auth()
-			.createUserWithEmailAndPassword(this.state.email, this.state.password)
+			.createUserWithEmailAndPassword(email, password)
 			.then(succ => {
+				servicePost('Agents',{name,address,location,firebaseUid:succ.uid})
 				firebase.auth().currentUser.updateProfile({
-					displayName:this.state.fullname,
+					displayName:name,
 				})
 			})
 			.catch(error => {
@@ -79,11 +93,22 @@ class SignUp extends Component {
 					<InputContainer>
 						<label>Full Name</label>
 						<Input
-							name="fullname"
+							name="name"
 							type="text"
 							fluid
 							focus
 							placeholder="Full Name"
+							onChange={this.handleInput}
+						/>
+					</InputContainer>
+					<InputContainer>
+						<label>address</label>
+						<Input
+							name="address"
+							type="text"
+							fluid
+							focus
+							placeholder="Address"
 							onChange={this.handleInput}
 						/>
 					</InputContainer>

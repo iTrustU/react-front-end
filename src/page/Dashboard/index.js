@@ -4,6 +4,7 @@ import { signOutHandler } from '../../actions'
 import { withRouter } from 'react-router-dom'
 class Dashboard extends Component {
   render () {
+    console.log(this.props.history);
     const {
       displayName,
       email

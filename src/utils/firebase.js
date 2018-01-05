@@ -9,7 +9,7 @@ const FIREBASE_MESSAGING_SENDER_ID = process.env.REACT_APP_FIREBASE_MESSAGING_SE
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
   authDomain: FIREBASE_API_DOMAIN,
-  databaseURL: FIREBASE_DATABASE_URL, 
+  databaseURL: FIREBASE_DATABASE_URL,
   projectId: FIREBASE_PROJECT_ID,
   storageBucket: "",
   messagingSenderId: FIREBASE_MESSAGING_SENDER_ID
