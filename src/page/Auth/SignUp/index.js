@@ -16,11 +16,6 @@ class SignUp extends Component {
 			email: '',
 			password: '',
 			name: '',
-			address:'',
-			location:{
-				lat: -6.121435,
-				lng: 106.774124,
-			}
 		}
 	}
 
@@ -43,11 +38,15 @@ class SignUp extends Component {
 			address,
 			location
 		} = this.state
+
+		// servicePost('users/register',{email, password}).catch(err => {
+		// 	console.log(err);
+		// })
 		firebase
 			.auth()
 			.createUserWithEmailAndPassword(email, password)
 			.then(succ => {
-				servicePost('Agents',{name,address,location,firebaseUid:succ.uid})
+				servicePost('Users',{realm:name,email,})
 				firebase.auth().currentUser.updateProfile({
 					displayName:name,
 				})
