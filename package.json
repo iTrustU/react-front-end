@@ -24,6 +24,7 @@
     "testsw": "react-scripts build && cra-append-sw --mode dev ./src/custom-sw.js",
     "build": "react-scripts build && cra-append-sw  --mode ./src/custom-sw.js",
     "serve": "serve -s build",
+    "deploy":"firebase deploy",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
