@@ -36,9 +36,11 @@ class Dashboard extends Component {
       showDrawer: !this.state.showDrawer
     })
   }
+	componentDidMount(){
+		console.log(this.props.userData);
+	}
   render () {
     const {
-      displayName,
       email
     } = this.props.userData
     return (
@@ -47,7 +49,7 @@ class Dashboard extends Component {
         <Container>
         <Drawer show={this.state.showDrawer}/>
         <MainContainer>
-          <h1>Hallo {displayName} : {email}</h1>
+          <h1>{email}</h1>
           <button onClick={() => this.props.dispatch(signOutHandler(this.props.history))}>
             Sign Out
           </button>

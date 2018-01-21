@@ -1,5 +1,6 @@
 import { push } from 'react-router-redux'
 import firebase from './utils/firebase'
+ import { post as servicePost} from './service'
 
 export const authenticateSuccess = () => ({
   type: 'AUTH_SUCCESS'
@@ -55,10 +56,40 @@ export const loginHandler = (event, loginData = {}) => dispatch => {
   }
 }
 
+export const registerHandler = (loginData = {}) => dispatch => {
+  const { email, password,aajiId } = loginData
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(firebase => {
+        servicePost({url:'users/register',body:{email,password:"secret",insuranceAgentId:aajiId}})
+        .then(res => {
+          const userData = {
+            ...res.data,
+            email:firebase.email,
+            deviceToken:localStorage.getItem('pushNotifToken')||''
+          }
+          console.log(userData);
+          dispatch(updateIsAuthenticated(!!firebase, userData))
+          // servicePost({
+          //   url:'users/update-device-token',
+          //   access_token:res.data.token,
+          //   body:{email:firebase.email, deviceToken:localStorage.getItem('pushNotifToken')||''}
+          // })
+        }).catch(err => {
+          console.log(err);
+        })
+
+      })
+      .catch(error => {
+        console.log(error.message, 'ERROR ON LOGIN HANDLER')
+      })
+}
+
 export const updateIsAuthenticated = (isAuthenticated, userData = {}, browserHistory = null) => (dispatch) => {
   if (isAuthenticated) {
-    dispatch(authenticateSuccess())
     dispatch(storeUserData(userData))
+    dispatch(authenticateSuccess())
     if (browserHistory) {
       browserHistory.push('/dashboard')
     } else {

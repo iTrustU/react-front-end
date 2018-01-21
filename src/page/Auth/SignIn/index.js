@@ -19,20 +19,16 @@ class SignIn extends Component {
 
 	handleInput = event => {
 		const { name, value } = event.target
-		const { loginData } = this.state
-		this.setState(
-			{
-				...loginData,
-				loginData: {
-					...loginData,
-					[name]: value
-				}
-			})
+		const loginData = this.state.loginData
+    loginData[name] = value
+		this.setState({
+			 loginData:loginData,
+		 })
 	}
 
 	render() {
 		return (
-			this.props.isAuthenticated 
+			this.props.isAuthenticated
 			? <Redirect to='/dashboard' />
 			: (<Container>
 				<h1>logo</h1>

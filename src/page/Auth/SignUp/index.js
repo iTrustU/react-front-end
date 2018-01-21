@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { Input, Label, Button, Icon } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { registerHandler, updateIsAuthenticated } from '../../../actions'
 import {
 	Container,
 	FormContainer,
 	WelcomeHeader,
 	InputContainer
 } from '../components/StyledComponents'
-import { Link } from 'react-router-dom'
+import { Link, Redirect, withRouter } from 'react-router-dom'
 import firebase from '../../../utils/firebase'
 import { post as servicePost} from '../../../service'
 
@@ -15,52 +17,25 @@ class SignUp extends Component {
 		loginData: {
 			email: '',
 			password: '',
-			name: '',
+			aajiId: '',
 		}
 	}
 
 	handleInput = event => {
-		this.setState(
-			{
-				...this.state.loginData,
-				loginData: {
-					...this.state.loginData,
-					[event.target.name]: event.target.value
-				}
-			}
-		)
+		const { name, value } = event.target
+		const loginData = this.state.loginData
+    loginData[name] = value
+		this.setState({
+			 loginData:loginData,
+		 })
 	}
 	onSingUp = () => {
-		const {
-			email,
-			password,
-			name,
-			address,
-			location
-		} = this.state
-
-		// servicePost('users/register',{email, password}).catch(err => {
-		// 	console.log(err);
-		// })
-		firebase
-			.auth()
-			.createUserWithEmailAndPassword(email, password)
-			.then(succ => {
-				servicePost('Users',{realm:name,email,})
-				firebase.auth().currentUser.updateProfile({
-					displayName:name,
-				})
-			})
-			.catch(error => {
-				// Handle Errors here.
-				console.log(error.message)
-				var errorCode = error.code
-				var errorMessage = error.message
-				// ...
-			})
+		this.props.dispatch(registerHandler(this.state.loginData))
 	}
 	render() {
 		return (
+			this.props.isAuthenticated ?
+			<Redirect to='/dashboard' /> : (
 			<Container>
 				<h1>logo</h1>
 				<FormContainer>
@@ -90,24 +65,13 @@ class SignUp extends Component {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<label>Full Name</label>
+						<label>AAJI ID</label>
 						<Input
-							name="name"
+							name="aajiId"
 							type="text"
 							fluid
 							focus
-							placeholder="Full Name"
-							onChange={this.handleInput}
-						/>
-					</InputContainer>
-					<InputContainer>
-						<label>address</label>
-						<Input
-							name="address"
-							type="text"
-							fluid
-							focus
-							placeholder="Address"
+							placeholder="AAJI ID"
 							onChange={this.handleInput}
 						/>
 					</InputContainer>
@@ -123,8 +87,14 @@ class SignUp extends Component {
 					</WelcomeHeader>
 				</FormContainer>
 			</Container>
+			)
 		)
 	}
 }
+const mapStateToProps = (state) => {
+	return {
+		isAuthenticated: state.authReducer.isAuthenticated
+	}
+}
 
-export default SignUp
+export default withRouter(connect(mapStateToProps)(SignUp))
