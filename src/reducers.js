@@ -12,6 +12,7 @@ export default {
           isAuthenticated: false
         }
       case 'STORE_USER_DATA':
+        localStorage.setItem('userData', JSON.stringify(action.payload.userData))
         return {
           ...state,
           userData: action.payload.userData

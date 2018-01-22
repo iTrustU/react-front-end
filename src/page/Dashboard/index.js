@@ -37,7 +37,7 @@ class Dashboard extends Component {
     })
   }
 	componentDidMount(){
-		console.log(this.props.userData);
+		// console.log('---------',this.props.userData.token);
 	}
   render () {
     const {
@@ -50,7 +50,7 @@ class Dashboard extends Component {
         <Drawer show={this.state.showDrawer}/>
         <MainContainer>
           <h1>{email}</h1>
-          <button onClick={() => this.props.dispatch(signOutHandler(this.props.history))}>
+          <button onClick={() => this.props.dispatch(signOutHandler(this.props.history,this.props.userData.token))}>
             Sign Out
           </button>
         </MainContainer>

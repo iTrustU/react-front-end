@@ -17,73 +17,54 @@ export const storeUserData = (userData) => ({
   }
 })
 
-export const signOutHandler = (browserHistory) => dispatch => {
-  firebase
-    .auth()
-    .signOut()
-    .then(() => {
+export const signOutHandler = (browserHistory, token) => dispatch => {
+      localStorage.removeItem("userData")
       dispatch(updateIsAuthenticated(false, {}, browserHistory))
-    })
-    .catch((err) => {
-      console.log('ERROR AT SIGN OUT HANDLER', err)
-    })
 }
 
 export const loginHandler = (event, loginData = {}) => dispatch => {
   const { name } = event.target
   const { email, password } = loginData
   if (name === 'email') {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(userData => {
-        dispatch(updateIsAuthenticated(!!userData, userData))
+    servicePost({url:'users/login',body:{email, password}})
+    .then(res => {
+      const userData = {
+        ...res.data,
+        deviceToken:localStorage.getItem('pushNotifToken')||''
+      }
+      servicePost({url:'users/update-device-token',
+        access_token:userData.access_token,
+        body:{
+          email,
+          deviceToken:userData.deviceToken
+        }
       })
-      .catch(error => {
-        console.log(error.message, 'ERROR ON LOGIN HANDLER')
-      })
-  } else if (name === 'facebook') {
-    const facebookProvider = new firebase.auth.FacebookAuthProvider()
-    firebase
-      .auth()
-      .signInWithPopup(facebookProvider)
-      .catch((error) => {
-        const errorCode = error.code,
-              errorMessage = error.message,
-              email = error.email
-        console.log(errorCode, errorMessage, email)
-      })
+      dispatch(updateIsAuthenticated(true, userData))
+    }).catch(err => {
+      console.log(err);
+    })
   }
 }
 
 export const registerHandler = (loginData = {}) => dispatch => {
-  const { email, password,aajiId } = loginData
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(firebase => {
-        servicePost({url:'users/register',body:{email,password:"secret",insuranceAgentId:aajiId}})
-        .then(res => {
-          const userData = {
-            ...res.data,
-            email:firebase.email,
-            deviceToken:localStorage.getItem('pushNotifToken')||''
-          }
-          console.log(userData);
-          dispatch(updateIsAuthenticated(!!firebase, userData))
-          // servicePost({
-          //   url:'users/update-device-token',
-          //   access_token:res.data.token,
-          //   body:{email:firebase.email, deviceToken:localStorage.getItem('pushNotifToken')||''}
-          // })
-        }).catch(err => {
-          console.log(err);
-        })
-
+  const { email, password, aajiId } = loginData
+    servicePost({url:'users/register',body:{email,password,insuranceAgentId:aajiId}})
+    .then(res => {
+      const userData = {
+        ...res.data,
+        deviceToken:localStorage.getItem('pushNotifToken')||''
+      }
+      servicePost({url:'users/update-device-token',
+        access_token:userData.access_token,
+        body:{
+          email,
+          deviceToken:userData.deviceToken
+        }
       })
-      .catch(error => {
-        console.log(error.message, 'ERROR ON LOGIN HANDLER')
-      })
+      dispatch(updateIsAuthenticated(true, userData))
+    }).catch(err => {
+      console.log(err);
+    })
 }
 
 export const updateIsAuthenticated = (isAuthenticated, userData = {}, browserHistory = null) => (dispatch) => {
@@ -97,7 +78,7 @@ export const updateIsAuthenticated = (isAuthenticated, userData = {}, browserHis
     }
   } else {
     dispatch(authenticateFail())
-    dispatch(storeUserData(userData))
+    // dispatch(storeUserData(userData))
     if (browserHistory) {
       browserHistory.push('/')
     } else {

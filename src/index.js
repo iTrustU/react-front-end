@@ -8,6 +8,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
 import { requestPermission } from './utils/notification'
 import thunk from 'redux-thunk'
+import logger from 'redux-logger'
 import createHistory from 'history/createBrowserHistory'
 import reducers from './reducers'
 
@@ -15,6 +16,7 @@ import App from './App'
 const history = createHistory()
 const middlewares = [
   thunk,
+  logger,
   routerMiddleware(history)
 ]
 const store = createStore(

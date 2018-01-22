@@ -7,6 +7,7 @@
     "cra-append-sw": "^2.1.1",
     "firebase": "^4.8.1",
     "history": "^4.7.2",
+    "logger": "^0.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
@@ -14,6 +15,7 @@
     "react-router-redux": "^5.0.0-alpha.9",
     "react-scripts": "^1.0.17",
     "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.77.1",
@@ -24,7 +26,7 @@
     "testsw": "react-scripts build && cra-append-sw --mode dev ./src/custom-sw.js",
     "build": "react-scripts build && cra-append-sw  --mode ./src/custom-sw.js",
     "serve": "serve -s build",
-    "deploy":"firebase deploy",
+    "deploy": "firebase deploy",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

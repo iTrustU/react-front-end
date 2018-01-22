@@ -17,16 +17,14 @@ class Routes extends React.Component {
     hasChecked: false
   }
   componentWillMount () {
-    firebase
-      .auth()
-      .onAuthStateChanged(userData => {
-        if (userData) {
-          this.props.dispatch(updateIsAuthenticated(true, userData))
-        } else {
-          this.props.dispatch(updateIsAuthenticated(false))
-        }
-        this.setState({ hasChecked: true })
-      })
+    const userData = JSON.parse(localStorage.getItem('userData'))
+    console.log('routes', userData);
+    if (userData) {
+      this.props.dispatch(updateIsAuthenticated(true, userData))
+    } else {
+      this.props.dispatch(updateIsAuthenticated(false))
+    }
+    this.setState({ hasChecked: true })
   }
 
   render () {
