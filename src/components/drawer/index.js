@@ -4,6 +4,7 @@ import { Icon } from 'semantic-ui-react'
 import { Link, withRouter } from 'react-router-dom'
 import { Container, ItemContainer } from './styledComponents'
 import { signOutHandler } from '../../actions'
+import {Font} from '../../components'
 
 const AuthenticatedMenu = [
 	{ title: 'Main', url: '/Main' },
@@ -21,16 +22,16 @@ const renderItem = props => {
 		return AuthenticatedMenu.map(menu => {
 			if (menu.title.toLowerCase() !== 'logout') {
 				return (
+					<Link to={menu.url}>
 					<ItemContainer>
-						<Link to={menu.url}>{menu.title}</Link>
+						<Font size={18} text={menu.title}/>
 					</ItemContainer>
+					</Link>
 				)
 			}
 			return (
-				<ItemContainer>
-					<button onClick={() => props.dispatch(signOutHandler(props.history))}>
-						Sign Out
-					</button>
+				<ItemContainer onClick={() => props.dispatch(signOutHandler(props.history))}>
+					<Font size={18} text={menu.title} />
 				</ItemContainer>
 			)
 		})

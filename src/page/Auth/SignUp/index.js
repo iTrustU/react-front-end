@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, Label, Button, Icon } from 'semantic-ui-react'
+import { Input, Button, Image } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { registerHandler, updateIsAuthenticated } from '../../../actions'
 import {
@@ -37,13 +37,12 @@ class SignUp extends Component {
 			this.props.isAuthenticated ?
 			<Redirect to='/dashboard' /> : (
 			<Container>
-				<h1>logo</h1>
+				<Image style={{height:'100px'}} src='https://firebasestorage.googleapis.com/v0/b/itrustu-a10b5.appspot.com/o/iTrustU-logo-500px.png?alt=media&token=8bfa404c-8db6-4e5c-ab1d-a9ddee2ab2fa'/>
 				<FormContainer>
 					<WelcomeHeader>
 						<h3>Sign up to ITrustU</h3>
 					</WelcomeHeader>
 					<InputContainer>
-						<label>Email</label>
 						<Input
 							name="email"
 							type="email"
@@ -54,7 +53,6 @@ class SignUp extends Component {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<label>Password</label>
 						<Input
 							name="password"
 							type="password"
@@ -65,7 +63,6 @@ class SignUp extends Component {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<label>AAJI ID</label>
 						<Input
 							name="aajiId"
 							type="text"

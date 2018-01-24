@@ -4,10 +4,10 @@ export const Container = styled.div`
 	flex-direction: ${props => props.type || 'column'};
 	justify-content: ${props => props.justify || 'center'};
 	align-items: center;
-	width:100%;
+	width:${props => props.width || '100%'};
 	display:flex;
 	padding: ${props => props.padding || '2vh 3vw'};
-	border-bottom: 1px solid #ddd;
+	border-bottom: ${props => props.borderB || '1px solid #ddd'};
 `
 export const FontContainer = styled.p`
 	font-size:${props => props.size}px;
@@ -16,6 +16,7 @@ export const FontContainer = styled.p`
 	font-family: 'Dosis', sans-serif;
 
 `
+
 export const RatingContainer = styled.div`
 	display:flex;
 	justify-content: center;

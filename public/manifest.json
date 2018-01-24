@@ -1,11 +1,31 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "ITrustU",
+  "name": "I Trust You",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "ldpi-32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "mdpi-46.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "hdpi-72.png",
+      "type": "image/png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "start_url": "./index.html",

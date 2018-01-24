@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
 	display: ${props => props.show ? 'flex':'none'};
 	flex-direction: column;
-  background-color: #f28d2c;
+  background-color: #fff;
   flex:2;
 	justify-content: flex-start;
 	align-items: center;
@@ -18,7 +18,7 @@ export const Container = styled.div`
 export const ItemContainer = styled.div`
   width:100%;
   text-align:center;
-  color:white;
+  color:#f28d2c;
   height:8vh;
   padding:2vh 2vw;
   @media (max-width:750px){

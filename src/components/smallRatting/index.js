@@ -1,6 +1,4 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Image, Card, Icon } from 'semantic-ui-react'
+import React from 'react'
 import ReactStars from 'react-stars'
 import {Container, RatingContainer, FontContainer } from './styledComponents'
 

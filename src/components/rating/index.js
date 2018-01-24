@@ -1,24 +1,25 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Image, Card, Icon } from 'semantic-ui-react'
+import React from 'react'
 import ReactStars from 'react-stars'
 import {Container, RatingContainer, FontContainer } from './styledComponents'
 
-const Rating = (props) => {
+const Rating = ({value,totalRating=2}) => {
   return(
     <Container
       type='row'
       justify='space-between'
-      padding='2vh 15vw'
+      padding='2vh 10vw'
       >
       <RatingContainer>
-        <FontContainer weigth={500} size={40}>{props.value}</FontContainer>
+        <FontContainer weigth={500} size={40}>{value}</FontContainer>
       </RatingContainer>
-      <ReactStars
-        count={5}
-        value={props.value}
-        size={24}
-        color2={'#ffd700'} />
+      <Container borderB='0' width='70%'>
+        <ReactStars
+          count={5}
+          value={value}
+          size={24}
+          color2={'#ffd700'} />
+        <FontContainer weigth={300} size={15}>{`${totalRating} reviews`}</FontContainer>
+      </Container>
     </Container>
   )
 }

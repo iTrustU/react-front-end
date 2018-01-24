@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, Label, Button, Icon } from 'semantic-ui-react'
+import { Input, Button,Image } from 'semantic-ui-react'
 import {
 	Container,
 	FormContainer,
@@ -7,7 +7,7 @@ import {
 	InputContainer
 } from '../components/StyledComponents'
 import { connect } from 'react-redux'
-import { loginHandler, updateIsAuthenticated } from '../../../actions'
+import { loginHandler } from '../../../actions'
 import { Link, Redirect, withRouter } from 'react-router-dom'
 class SignIn extends Component {
 	state = {
@@ -31,13 +31,12 @@ class SignIn extends Component {
 			this.props.isAuthenticated
 			? <Redirect to='/dashboard' />
 			: (<Container>
-				<h1>logo</h1>
+			<Image style={{height:'100px'}} src='https://firebasestorage.googleapis.com/v0/b/itrustu-a10b5.appspot.com/o/iTrustU-logo-500px.png?alt=media&token=8bfa404c-8db6-4e5c-ab1d-a9ddee2ab2fa'/>
 				<FormContainer>
 					<WelcomeHeader>
 						<h3>Sign in to ITrustU</h3>
 					</WelcomeHeader>
 					<InputContainer>
-						<label>Email</label>
 						<Input
 							name="email"
 							type="email"
@@ -48,7 +47,6 @@ class SignIn extends Component {
 						/>
 					</InputContainer>
 					<InputContainer>
-						<label>Password</label>
 						<Input
 							name="password"
 							type="password"
@@ -61,11 +59,6 @@ class SignIn extends Component {
 					<InputContainer>
 						<Button fluid name="email" onClick={event => this.props.dispatch(loginHandler(event, this.state.loginData))}>
 							Login
-						</Button>
-					</InputContainer>
-					<InputContainer>
-						<Button fluid name="facebook" onClick={event => this.props.dispatch(loginHandler(event))}>
-							<Icon name="facebook" />login with Facebook
 						</Button>
 					</InputContainer>
 					<WelcomeHeader>

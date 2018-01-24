@@ -43,6 +43,8 @@ export const post = ({url='',access_token='', body={}}) => {
   return axios.post(BaseUrl+url+`?access_token=${access_token}`,body)
 }
 export const get = ({url='', access_token='', query={}}) => {
-  console.log(queryString(query));
-  return axios.get(BaseUrl+url+'?'+`access_token=${access_token}`+queryString(query))
+  if (access_token === '') {
+    return axios.get(BaseUrl+url)
+  }
+  return axios.get(BaseUrl+url+`access_token=${access_token}`)
 }

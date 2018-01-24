@@ -26,7 +26,7 @@ export const loginHandler = (event, loginData = {}) => dispatch => {
   const { name } = event.target
   const { email, password } = loginData
   if (name === 'email') {
-    servicePost({url:'users/login',body:{email, password}})
+    servicePost({url:'users/custom-login',body:{email, password}})
     .then(res => {
       const userData = {
         ...res.data,
@@ -74,7 +74,7 @@ export const updateIsAuthenticated = (isAuthenticated, userData = {}, browserHis
     if (browserHistory) {
       browserHistory.push('/dashboard')
     } else {
-      dispatch(push('/dashboard'))
+      // dispatch(push('/dashboard'))
     }
   } else {
     dispatch(authenticateFail())

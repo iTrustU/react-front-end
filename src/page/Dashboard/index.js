@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Image, Card, Icon } from 'semantic-ui-react'
+import { Image, Card, Icon,Button } from 'semantic-ui-react'
 import ReactStars from 'react-stars'
 import {
 	Container,
@@ -9,6 +9,7 @@ import {
 	FontContainer,
 	RatingContainer,
 	LogoContainer,
+	ProfileContainer,
 	ImageListContainer,
 } from './components/StyledComponents'
 import { signOutHandler } from '../../actions'
@@ -36,31 +37,36 @@ class Dashboard extends Component {
 				<Container name="Container">
 					<Drawer show={this.state.showDrawer} />
 					<MainContainer name="MainContainer">
-						<GeneralContainer>
+						<GeneralContainer type='row'>
+							<ProfileContainer flex='2' margin='0' padding='1vh 0 1vh 0'>
 							<Image
 								src={userDetail.profile.profilePicture}
 								size='small'
 								style={{height:'100px',width:'100px',margin:0}}
 								circular
 								/>
-							<FontContainer size={20}>{userDetail.profile.name}</FontContainer>
+						</ProfileContainer>
+							<ProfileContainer display='block' flex='2' align='flex-start'>
+								<FontContainer margin='0' size={20}>{userDetail.profile.name}</FontContainer>
+								<FontContainer margin='0' weigth={100}  size={14}>{userDetail.profile.level}</FontContainer>
+							</ProfileContainer>
 						</GeneralContainer>
 							<Rating value="4.5" />
 						<GeneralContainer>
 							<ImageListContainer>
 								<LogoContainer>
 									<Image
-										src='http://4.bp.blogspot.com/-8nwQisgU-MY/VKprpJJhSaI/AAAAAAAABMY/jb2gdUwjJuA/w1200-h630-p-k-no-nu/logo%2Bprudential.png'
+										src={userDetail.insuranceCompany.logoUrl}
 										style={{width:'50px',margin:0}}
 										/>
 								</LogoContainer>
-								<FontContainer size={16}>{userDetail.profile.name}</FontContainer>
+								<FontContainer size={16}>{userDetail.insuranceCompany.name}</FontContainer>
 							</ImageListContainer>
 							<ImageListContainer>
 								<LogoContainer>
 									<Icon name='point' style={{color:'#f28d2c'}}/>
 								</LogoContainer>
-								<FontContainer size={16}>{userDetail.profile.name}</FontContainer>
+								<FontContainer size={16}>{userDetail.profile.city}</FontContainer>
 							</ImageListContainer>
 						</GeneralContainer>
 						<GeneralContainer>

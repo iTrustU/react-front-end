@@ -13,13 +13,14 @@ export const FormContainer = styled.div`
 	border-radius: 5px;
 	justify-content: center;
 	align-items: center;
+	margin:2vh 0;
 `
 
 export const WelcomeHeader = styled.div`
-	background-color: #124aa5;
+	background-color: white;
 	height: 50px;
 	display: flex;
-	color: yellow;
+	color: #808080;
 	justify-content: center;
 	align-items: center;
 `
@@ -27,5 +28,5 @@ export const InputContainer = styled.div`
 	justify-content: flex-start;
 	flex: 1;
 	align-items: center;
-	margin: 10px 0px;
+	margin: 4vh 0px;
 `

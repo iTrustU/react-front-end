@@ -33,6 +33,15 @@ export const GeneralContainer = styled.div`
 	padding: ${props => props.padding || '2vh 3vw'};
 	border-bottom: 1px solid #ddd;
 `
+export const ProfileContainer = styled.div`
+	flex-direction: ${props => props.type || 'column'};
+	justify-content: ${props => props.justify || 'center'};
+	align-items: ${props => props.align || 'center'};
+	display:${props => props.display || 'flex'};;
+	flex:${props => props.flex || '1'};
+	padding: ${props => props.padding || '2vh 3vw'};
+	margin: ${props => props.margin || '0vh 3vw'};
+`
 
 export const FontContainer = styled.p`
 	font-size:${props => props.size}px;
