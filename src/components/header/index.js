@@ -12,7 +12,7 @@ const Header = (props) => {
       <LogoContainer>
         <img
           style={{width:100}}
-          src='https://firebasestorage.googleapis.com/v0/b/itrustu-a10b5.appspot.com/o/iTrustU-logo-500px%20(1).png?alt=media&token=46a2ded3-9875-4da7-bd38-3e202301fe81'/>
+          src='https://firebasestorage.googleapis.com/v0/b/itrustu-a10b5.appspot.com/o/ItrustU-text-logo.png?alt=media&token=bfa1b4eb-f1a0-4202-a846-76ebc0253a83'/>
       </LogoContainer>
       <MenuContainer/>
     </Container>

@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import SignIn from './page/Auth/SignIn'
 import SignUp from './page/Auth/SignUp'
 import Dashboard from './page/Dashboard'
+import Profile from './page/profile'
 import NotFoundPage from './page/NotFoundPage'
 import firebase from './utils/firebase'
 import { updateIsAuthenticated } from './actions'
@@ -37,6 +38,7 @@ class Routes extends React.Component {
           <Route path='/signin' component={SignIn} />
           <Route path='/signup' component={SignUp} />
           <Route path='/dashboard' component={Dashboard} />
+          <Route path='/profile/:id' component={Profile} />
           <Route component={NotFoundPage} />
         </Switch>
       </Router>)

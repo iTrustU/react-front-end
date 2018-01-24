@@ -8,10 +8,12 @@ import {
 	GeneralContainer,
 	FontContainer,
 	RatingContainer,
+	LogoContainer,
+	ImageListContainer,
 } from './components/StyledComponents'
 import { signOutHandler } from '../../actions'
 
-import { Header, Drawer } from '../../components'
+import { Header, Drawer, Rating, CommentList  } from '../../components'
 import { withRouter } from 'react-router-dom'
 
 class Dashboard extends Component {
@@ -43,15 +45,26 @@ class Dashboard extends Component {
 								/>
 							<FontContainer size={20}>{userDetail.profile.name}</FontContainer>
 						</GeneralContainer>
+							<Rating value="4.5" />
 						<GeneralContainer>
-							<RatingContainer>
-								<FontContainer weigth={500} size={40}>4</FontContainer>
-							</RatingContainer>
-							<ReactStars
-								count={5}
-								value={4}
-								size={24}
-								color2={'#ffd700'} />
+							<ImageListContainer>
+								<LogoContainer>
+									<Image
+										src='http://4.bp.blogspot.com/-8nwQisgU-MY/VKprpJJhSaI/AAAAAAAABMY/jb2gdUwjJuA/w1200-h630-p-k-no-nu/logo%2Bprudential.png'
+										style={{width:'50px',margin:0}}
+										/>
+								</LogoContainer>
+								<FontContainer size={16}>{userDetail.profile.name}</FontContainer>
+							</ImageListContainer>
+							<ImageListContainer>
+								<LogoContainer>
+									<Icon name='point' style={{color:'#f28d2c'}}/>
+								</LogoContainer>
+								<FontContainer size={16}>{userDetail.profile.name}</FontContainer>
+							</ImageListContainer>
+						</GeneralContainer>
+						<GeneralContainer>
+							<CommentList/>
 						</GeneralContainer>
 					</MainContainer>
 				</Container>

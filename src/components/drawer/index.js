@@ -7,7 +7,7 @@ import { signOutHandler } from '../../actions'
 
 const AuthenticatedMenu = [
 	{ title: 'Main', url: '/Main' },
-	{ title: 'Profil', url: '/profil' },
+	{ title: 'Profil', url: '/profile' },
 	{ title: 'Review', url: '/review' },
 	{ title: 'Logout', url: '' }
 ]
