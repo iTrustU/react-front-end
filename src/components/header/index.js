@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {InstantSearch, Hits, SearchBox} from 'react-instantsearch/dom';
 import { Container, MenuContainer, LogoContainer, SearchContainer, InerContainer } from './styledComponents'
 import {Icon, Image} from 'semantic-ui-react'
 
@@ -31,7 +32,14 @@ class  Header extends Component {
         </MenuContainer>
       </InerContainer>
       <SearchContainer show={this.state.isSearch}>
-        <h1>lalaalla</h1>
+        <InstantSearch
+          appId="4LH6EUNWWA"
+          apiKey="cbc04bfdccda202e8c712f49297f6971"
+          indexName="iTrustU"
+        >
+        <SearchBox/>
+
+      </InstantSearch>
       </SearchContainer>
     </Container>
     )

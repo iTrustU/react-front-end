@@ -22,7 +22,7 @@ const renderItem = props => {
 		return AuthenticatedMenu.map(menu => {
 			if (menu.title.toLowerCase() !== 'logout') {
 				return (
-					<Link to={menu.url}>
+					<Link to={menu.url} key={menu.title}>
 					<ItemContainer>
 						<Font size={18} text={menu.title}/>
 					</ItemContainer>
@@ -30,7 +30,7 @@ const renderItem = props => {
 				)
 			}
 			return (
-				<ItemContainer onClick={() => props.dispatch(signOutHandler(props.history))}>
+				<ItemContainer  key={menu.title} onClick={() => props.dispatch(signOutHandler(props.history))}>
 					<Font size={18} text={menu.title} />
 				</ItemContainer>
 			)
