@@ -7,18 +7,16 @@ import { signOutHandler } from '../../actions'
 import {Font} from '../../components'
 
 const AuthenticatedMenu = [
-	{ title: 'Main', url: '/Main' },
-	{ title: 'Profil', url: '/profile' },
-	{ title: 'Review', url: '/review' },
+	{ title: 'home', url: '/' },
 	{ title: 'Logout', url: '' }
 ]
 const unAuthenticatedMenu = [
-	{ title: 'Main', url: '/Main' },
-	{ title: 'login', url: '/login' },
-	{ title: 'register', url: '/register' }
+	{ title: 'home', url: '/' },
+	{ title: 'login', url: '/signin' },
+	{ title: 'register', url: '/signup' }
 ]
 const renderItem = props => {
-	if (!props.userData.isAuthenticated) {
+	if (!props.userData.isAuthenticate) {
 		return AuthenticatedMenu.map(menu => {
 			if (menu.title.toLowerCase() !== 'logout') {
 				return (

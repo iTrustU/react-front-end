@@ -80,9 +80,9 @@ export const updateIsAuthenticated = (isAuthenticated, userData = {}, browserHis
     dispatch(authenticateFail())
     // dispatch(storeUserData(userData))
     if (browserHistory) {
-      browserHistory.push('/')
+      browserHistory.push('/signin')
     } else {
-      dispatch(push('/'))
+      dispatch(push('/signin'))
     }
   }
 }
