@@ -26,9 +26,9 @@ class Dashboard extends Component {
 			showDrawer: !this.state.showDrawer
 		})
 	}
-	componentDidMount() {
-		console.log(this.props.userData.userDetail)
-	}
+	// componentDidMount() {
+	// 	console.log(this.props.userData.userDetail)
+	// }
 	render() {
 		const { userDetail } = this.props.userData
 		return (
@@ -70,7 +70,7 @@ class Dashboard extends Component {
 							</ImageListContainer>
 						</GeneralContainer>
 						<GeneralContainer>
-							<CommentList/>
+							<CommentList userId={userDetail.id}/>
 						</GeneralContainer>
 					</MainContainer>
 				</Container>

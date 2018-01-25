@@ -9,6 +9,7 @@ import SignIn from './page/Auth/SignIn'
 import SignUp from './page/Auth/SignUp'
 import Dashboard from './page/Dashboard'
 import Profile from './page/profile'
+import Home from './page/home'
 import NotFoundPage from './page/NotFoundPage'
 import firebase from './utils/firebase'
 import { updateIsAuthenticated } from './actions'
@@ -34,7 +35,7 @@ class Routes extends React.Component {
       ? <h1>Loading...</h1>
       : (<Router>
         <Switch>
-          <Route exact path='/' component={SignIn} />
+          <Route exact path='/' component={Home} />
           <Route path='/signin' component={SignIn} />
           <Route path='/signup' component={SignUp} />
           <Route path='/dashboard' component={Dashboard} />

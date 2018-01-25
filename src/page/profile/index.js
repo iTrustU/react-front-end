@@ -110,7 +110,7 @@ class Profile extends Component {
 							<RatingForm userId={userData.id}/>
 						</GeneralContainer>
 						<GeneralContainer>
-							<CommentList/>
+							<CommentList userId={userData.id}/>
 						</GeneralContainer>
 					</MainContainer>
 				</Container>

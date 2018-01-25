@@ -1,8 +1,21 @@
 import React, {Component} from 'react';
-import {InstantSearch, Hits, SearchBox} from 'react-instantsearch/dom';
+import {InstantSearch, Hits, SearchBox, Highlight} from 'react-instantsearch/dom';
+import { Link } from 'react-router-dom'
 import { Container, MenuContainer, LogoContainer, SearchContainer, InerContainer } from './styledComponents'
 import {Icon, Image} from 'semantic-ui-react'
 
+
+const Product = ({hit}) =>  {
+  return (
+    <div style={{marginTop: '10px'}}>
+      <Link to={`/profile/${hit.id}`} style={{width:'100%'}}>
+      <span className="hit-name">
+        <Highlight attributeName="profile.name" hit={hit} />
+      </span>
+    </Link>
+    </div>
+  );
+};
 
 
 class  Header extends Component {
@@ -15,7 +28,6 @@ class  Header extends Component {
     })
   }
   render(){
-    console.log(this.state.isSearch);
     return(
       <Container>
       <InerContainer>
@@ -38,6 +50,9 @@ class  Header extends Component {
           indexName="iTrustU"
         >
         <SearchBox/>
+        <div>
+          <Hits hitComponent={Product} />
+        </div>
 
       </InstantSearch>
       </SearchContainer>

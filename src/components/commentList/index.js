@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Image, Button, Comment } from 'semantic-ui-react'
 import styled from 'styled-components'
 import CommentCard from '../commentCard'
+import Font from '../font'
+import {get} from '../../service'
 export const Container = styled.div`
 	flex-direction: ${props => props.type || 'column'};
 	justify-content: ${props => props.justify || 'center'};
@@ -22,7 +24,34 @@ export const ListContainer = styled.div`
   padding: ${props => props.padding || '2vh 0vw'};
 `
 
+
 class CommentList extends Component {
+	state={
+		reviews:[]
+	}
+	renderData = (datas=[])=> {
+		if (datas.length === 0) {
+			return(
+				<ListContainer>
+					<Font text={'anda belum memiliki reviews'}/>
+				</ListContainer>
+			)
+		}
+		return(
+			<ListContainer>
+				{datas.map(data =>  <CommentCard key={data.id}/>)}
+			</ListContainer>
+		)
+	}
+	componentDidMount(){
+		get({url:`users/${this.props.userId}/reviews`})
+		.then(res => {
+			console.log(res.data);
+			this.setState({
+				reviews:res.data
+			})
+		})
+	}
   render(){
     return(
     <Container>
@@ -32,10 +61,7 @@ class CommentList extends Component {
           <Button style={{width:'80px'}}>all</Button>
         </Button.Group>
       </ButonContainer>
-			<ListContainer>
-				<CommentCard/>
-				<CommentCard/>
-			</ListContainer>
+		{this.renderData(this.state.datas)}
     </Container>
   )
   }

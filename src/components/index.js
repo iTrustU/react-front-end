@@ -5,6 +5,7 @@ import CommentList from './commentList'
 import SmallRating from './commentList'
 import Font from './font'
 import RatingForm from'./ratingForm'
+import AgentCard from'./agentCard'
 
 export {Header}
 export {Drawer}
@@ -13,3 +14,4 @@ export {CommentList}
 export {SmallRating}
 export {Font}
 export {RatingForm}
+export {AgentCard}

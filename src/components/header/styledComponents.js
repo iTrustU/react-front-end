@@ -26,9 +26,9 @@ export const SearchContainer = styled.div`
 	align-items: center;
   height:12vh;
   padding:2vh 2vw;
-  @media (max-width:750px){
-    height:8vh;
-  }
+	@media (max-width:750px){
+		max-height:14vh;
+	}
 `
 
 export const MenuContainer = styled.div`
