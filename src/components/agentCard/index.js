@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import SmallRating from '../smallRatting'
+// import SmallRating from '../smallRatting'
 import Font from '../font'
 import ReactStars from 'react-stars'
 import { Link } from 'react-router-dom'
-import {Image, Icon, Button } from 'semantic-ui-react'
+import {Image, Icon } from 'semantic-ui-react'
 
 export const Container = styled.div`
 	flex-direction: ${props => props.type || 'column'};

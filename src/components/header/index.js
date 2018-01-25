@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {InstantSearch, Hits, SearchBox, Highlight} from 'react-instantsearch/dom';
 import { Link } from 'react-router-dom'
 import { Container, MenuContainer, LogoContainer, SearchContainer, InerContainer } from './styledComponents'
-import {Icon, Image} from 'semantic-ui-react'
+import {Icon } from 'semantic-ui-react'
 
 
 const Product = ({hit}) =>  {

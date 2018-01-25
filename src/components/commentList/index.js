@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image, Button, Comment } from 'semantic-ui-react'
+import {  Button } from 'semantic-ui-react'
 import styled from 'styled-components'
 import CommentCard from '../commentCard'
 import Font from '../font'
@@ -24,24 +24,31 @@ export const ListContainer = styled.div`
   padding: ${props => props.padding || '2vh 0vw'};
 `
 
+const RenderData = (datas=[])=> {
+	console.log('------datas',datas);
+	if (datas.length === 0) {
+		return(
+			<ListContainer>
+				<Font text={'anda belum memiliki reviews'}/>
+			</ListContainer>
+		)
+	}
+	return(
+		<ListContainer>
+			{datas.map(data =>
+				<CommentCard
+					key={data.id}
+					value={data.rating}
+					comment={data.comment}
+					/>
+			)}
+		</ListContainer>
+	)
+}
 
 class CommentList extends Component {
 	state={
 		reviews:[]
-	}
-	renderData = (datas=[])=> {
-		if (datas.length === 0) {
-			return(
-				<ListContainer>
-					<Font text={'anda belum memiliki reviews'}/>
-				</ListContainer>
-			)
-		}
-		return(
-			<ListContainer>
-				{datas.map(data =>  <CommentCard key={data.id}/>)}
-			</ListContainer>
-		)
 	}
 	componentDidMount(){
 		get({url:`users/${this.props.userId}/reviews`})
@@ -61,7 +68,7 @@ class CommentList extends Component {
           <Button style={{width:'80px'}}>all</Button>
         </Button.Group>
       </ButonContainer>
-		{this.renderData(this.state.datas)}
+		{RenderData(this.state.reviews)}
     </Container>
   )
   }

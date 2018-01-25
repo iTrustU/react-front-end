@@ -11,7 +11,7 @@ import Dashboard from './page/Dashboard'
 import Profile from './page/profile'
 import Home from './page/home'
 import NotFoundPage from './page/NotFoundPage'
-import firebase from './utils/firebase'
+// import firebase from './utils/firebase'
 import { updateIsAuthenticated } from './actions'
 
 class Routes extends React.Component {

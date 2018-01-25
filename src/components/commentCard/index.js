@@ -47,9 +47,9 @@ export const TextContainer = styled.div`
 
 const CommentCard = ({
 	value = '4.1',
-	name = 'raysa',
+	name = '',
 	comment = 'agent asuransi ini antap jaya aldkalkdlakdlak dlakdlakdlakdlakdlakdlakdlakdalkdlllllllllllllllllllllll',
-	date = '14-05-2017'
+	date = ''
 }) => {
 	return (
 		<Container type="row">

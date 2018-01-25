@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Image, Card, Icon, Loader, Button } from 'semantic-ui-react'
+// import { connect } from 'react-redux'
+import { Image, Icon, Loader, Button } from 'semantic-ui-react'
 import { get } from '../../service'
-import ReactStars from 'react-stars'
+// import ReactStars from 'react-stars'
 import {
 	Container,
 	MainContainer,
 	GeneralContainer,
 	FontContainer,
-	RatingContainer,
 	LogoContainer,
 	ImageListContainer,
 	ProfileContainer,
@@ -21,6 +20,7 @@ class Profile extends Component {
 	state = {
 		showDrawer: false,
 		userData:'',
+		finalRating:''
 	}
 	changeDrawer = () => {
 		this.setState({
@@ -30,15 +30,26 @@ class Profile extends Component {
 	componentDidMount() {
 		get({url:`users/${this.props.match.params.id}?filter[include]=profile&filter[include]=insuranceCompany`})
 		.then(res => {
-			console.log(res);
-			this.setState({
-				userData:res.data
-			})
+			// this.setState({
+			// 	userData:res.data
+			// })
+
+			get({url:`users/${this.props.match.params.id}/reviews/count`})
+			.then(_res => {
+				this.setState({
+					finalRating:_res.data.count,
+					userData:res.data
+				})
 		}).catch(err => {
 			console.log(err);
 		})
+
+		}).catch(err=> {
+			alert('upssss something wrong')
+		})
+
 	}
-  // 
+  //
 	// shouldComponentUpdate(newProps, newState){
 	// 	if (newProps.match.params.id !== this.props.match.params.id ) {
 	// 		console.log('masuk sini');
@@ -59,7 +70,7 @@ class Profile extends Component {
 		return number
 	}
 	render( ) {
-		if (this.state.userData == '') {
+		if (this.state.userData === '') {
 			return (
 				<div>
 					<Header name="header" menuClick={this.changeDrawer} />
@@ -99,7 +110,9 @@ class Profile extends Component {
 								</a>
 							</ProfileContainer>
 						</GeneralContainer>
-							<Rating value={userData.profile.finalRating.toFixed(1)} />
+							<Rating value={userData.profile.finalRating.toFixed(1)}
+								totalRating={this.state.finalRating}
+								 />
 						<GeneralContainer>
 							<ImageListContainer>
 								<LogoContainer>

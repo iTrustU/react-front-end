@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactStars from 'react-stars'
-import {Container, RatingContainer, FontContainer } from './styledComponents'
+import { RatingContainer, FontContainer } from './styledComponents'
 
 const SmallRating = (props) => {
   return(

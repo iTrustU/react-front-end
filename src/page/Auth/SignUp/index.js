@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Input, Button, Image } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { registerHandler, updateIsAuthenticated } from '../../../actions'
+import { registerHandler,
+	// updateIsAuthenticated
+} from '../../../actions'
 import {
 	Container,
 	FormContainer,
@@ -9,8 +11,8 @@ import {
 	InputContainer
 } from '../components/StyledComponents'
 import { Link, Redirect, withRouter } from 'react-router-dom'
-import firebase from '../../../utils/firebase'
-import { post as servicePost} from '../../../service'
+// import firebase from '../../../utils/firebase'
+// import { post as servicePost} from '../../../service'
 
 class SignUp extends Component {
 	state = {

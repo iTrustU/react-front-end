@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Icon } from 'semantic-ui-react'
+// import { Icon } from 'semantic-ui-react'
 import { Link, withRouter } from 'react-router-dom'
 import { Container, ItemContainer } from './styledComponents'
 import { signOutHandler } from '../../actions'

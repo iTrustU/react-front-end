@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Image, Card, Icon, Input, TextArea, Button } from 'semantic-ui-react'
+// import { connect } from 'react-redux'
+import { Input, TextArea, Button } from 'semantic-ui-react'
 import ReactStars from 'react-stars'
 import {Container, HeaderContainer, CommentContainer  } from './styledComponents'
 import {get,post} from '../../service'

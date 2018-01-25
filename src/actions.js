@@ -1,5 +1,5 @@
 import { push } from 'react-router-redux'
-import firebase from './utils/firebase'
+// import firebase from './utils/firebase'
  import { post as servicePost} from './service'
 
 export const authenticateSuccess = () => ({

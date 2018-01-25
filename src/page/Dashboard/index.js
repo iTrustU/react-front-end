@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Image, Card, Icon,Button } from 'semantic-ui-react'
-import ReactStars from 'react-stars'
+import { Image, Icon } from 'semantic-ui-react'
+// import ReactStars from 'react-stars'
 import {
 	Container,
 	MainContainer,
 	GeneralContainer,
 	FontContainer,
-	RatingContainer,
+	// RatingContainer,
 	LogoContainer,
 	ProfileContainer,
 	ImageListContainer,
 } from './components/StyledComponents'
-import { signOutHandler } from '../../actions'
+import {get} from '../../service'
+// import { signOutHandler } from '../../actions'
 
 import { Header, Drawer, Rating, CommentList  } from '../../components'
 import { withRouter } from 'react-router-dom'
@@ -23,12 +24,20 @@ class Dashboard extends Component {
 	}
 	changeDrawer = () => {
 		this.setState({
-			showDrawer: !this.state.showDrawer
+			showDrawer: !this.state.showDrawer,
+			finalRating:'',
 		})
 	}
-	// componentDidMount() {
-	// 	console.log(this.props.userData.userDetail)
-	// }
+	componentDidMount() {
+		get({url:`users/${this.props.userData.userDetail.id}/reviews/count`})
+		.then(res => {
+			this.setState({
+				finalRating:res.data.count
+			})
+		}).catch(err=> {
+			alert('upssss something wrong')
+		})
+	}
 	render() {
 		const { userDetail } = this.props.userData
 		return (
@@ -51,7 +60,8 @@ class Dashboard extends Component {
 								<FontContainer margin='0' weigth={100}  size={14}>{userDetail.profile.level}</FontContainer>
 							</ProfileContainer>
 						</GeneralContainer>
-							<Rating value="4.5" />
+							<Rating value={userDetail.profile.finalRating.toFixed(1)}
+								totalRating={this.state.finalRating} />
 						<GeneralContainer>
 							<ImageListContainer>
 								<LogoContainer>

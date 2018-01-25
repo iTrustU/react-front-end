@@ -1,19 +1,18 @@
 import React, { Component } from 'react'
-import { Image, Card, Icon, Loader, Button } from 'semantic-ui-react'
+import { Loader } from 'semantic-ui-react'
 import { get } from '../../service'
-import ReactStars from 'react-stars'
 import {
 	Container,
 	MainContainer,
 	GeneralContainer,
-	FontContainer,
-	RatingContainer,
-	LogoContainer,
-	ImageListContainer,
-	ProfileContainer,
+	// FontContainer,
+	// RatingContainer,
+	// LogoContainer,
+	// ImageListContainer,
+	// ProfileContainer,
 } from './components/StyledComponents'
 
-import { Header, Drawer, Rating, AgentCard  } from '../../components'
+import { Header, Drawer, AgentCard  } from '../../components'
 import { withRouter } from 'react-router-dom'
 
 class Home extends Component {

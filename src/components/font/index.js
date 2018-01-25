@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import SmallRating from '../smallRatting'
+// import SmallRating from '../smallRatting'
 
 export const FontContainer = styled.p`
 	font-size:${props => props.size || '12'}px;
