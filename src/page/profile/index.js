@@ -38,6 +38,17 @@ class Profile extends Component {
 			console.log(err);
 		})
 	}
+  // 
+	// shouldComponentUpdate(newProps, newState){
+	// 	if (newProps.match.params.id !== this.props.match.params.id ) {
+	// 		console.log('masuk sini');
+	// 		return true
+	// 	}else if(newState.userData !== this.state.userData){
+	// 		console.log('masuk sini1');
+	// 		return true
+	// 	}
+	// 	return false
+	// }
 	getPhoneNumber(number){
 		if (number.substring(0,1) === '0' ) {
 			let newNumber = number.split('')
