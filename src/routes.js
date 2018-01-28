@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import SignIn from './page/Auth/SignIn'
 import SignUp from './page/Auth/SignUp'
 import Dashboard from './page/Dashboard'
+import CompanyProfile from './page/companyProfile'
 import Profile from './page/profile'
 import Home from './page/home'
 import NotFoundPage from './page/NotFoundPage'
@@ -39,6 +40,7 @@ class Routes extends React.Component {
           <Route path='/signup' component={SignUp} />
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/profile/:id' component={Profile} />
+          <Route path='/company/:id' component={CompanyProfile} />
           <Route component={NotFoundPage} />
         </Switch>
       </Router>)

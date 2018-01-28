@@ -5,6 +5,7 @@ export const FontContainer = styled.p`
 	font-size:${props => props.size || '12'}px;
 	font-weight:${props => props.weight ||'300'}px;
 	font-family: 'Dosis', sans-serif;
+	align:${props => props.align ||'justify'};
   letter-spacing:${props => props.spacing || '1'}px;
   margin:${props => props.margin ||'0vh 0vw'};
 `

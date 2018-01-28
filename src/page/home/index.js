@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Loader } from 'semantic-ui-react'
+import axios from 'axios'
 import { get } from '../../service'
 import {
 	Container,
@@ -19,7 +20,7 @@ class Home extends Component {
 	state = {
 		showDrawer: false,
 		filterByCity:false,
-		userCity:'jakarta',
+		userCity:'',
 		userData:[],
 	}
 	changeDrawer = () => {
@@ -37,6 +38,20 @@ class Home extends Component {
 		}).catch(err => {
 			alert('sorry something wrong')
 		})
+		const self = this
+		if ("geolocation" in navigator) {
+			var watchID = navigator.geolocation.getCurrentPosition(function(position) {
+				axios.get(`http://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&language=idn&region=idn`)
+				.then(({data}) => {
+					console.log(data.results[6].formatted_address.split(',')[0]);
+					self.setState({
+						userCity:data.results[6].formatted_address.split(',')[0]
+					})
+				})
+		});
+		} else {
+
+		}
 	}
 
 	changeFilterByCityStatus = () => {
