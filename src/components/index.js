@@ -7,6 +7,8 @@ import Font from './font'
 import RatingForm from'./ratingForm'
 import AgentCard from'./agentCard'
 import LocationHeader from './locationHeader'
+import AgentCardPortait from './agentCardPortait'
+import AgentListH from './agentListH'
 
 export {Header}
 export {Drawer}
@@ -17,3 +19,5 @@ export {Font}
 export {RatingForm}
 export {AgentCard}
 export {LocationHeader}
+export {AgentCardPortait}
+export {AgentListH}

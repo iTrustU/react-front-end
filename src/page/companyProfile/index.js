@@ -13,7 +13,7 @@ import {
 	ProfileContainer,
 } from './components/StyledComponents'
 
-import { Header, Drawer,Font  } from '../../components'
+import { Header, Drawer,Font, AgentListH  } from '../../components'
 import { withRouter } from 'react-router-dom'
 
 class CompanyProfile extends Component {
@@ -101,6 +101,9 @@ class CompanyProfile extends Component {
 						<GeneralContainer padding='2vh 2vw'>
 							<Font size={22} weight='500' spacing='4px' text='Description'/>
 							<Font size={12} weight='300' spacing='1px' text={companyData.description}/>
+						</GeneralContainer>
+						<GeneralContainer padding='2vh 2vw'>
+							<AgentListH/>
 						</GeneralContainer>
 					</MainContainer>
 				</Container>

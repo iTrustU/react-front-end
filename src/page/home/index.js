@@ -43,9 +43,10 @@ class Home extends Component {
 			var watchID = navigator.geolocation.getCurrentPosition(function(position) {
 				axios.get(`http://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&language=idn&region=idn`)
 				.then(({data}) => {
-					console.log(data.results[6].formatted_address.split(',')[0]);
+					const newUserCity = data &&  data.results && data.results[6] &&
+															data.results[6].formatted_address && data.results[6].formatted_address.split(',')[0] || ''
 					self.setState({
-						userCity:data.results[6].formatted_address.split(',')[0]
+						userCity: newUserCity
 					})
 				})
 		});

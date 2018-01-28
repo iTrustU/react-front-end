@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-// import SmallRating from '../smallRatting'
-import Font from '../font'
 import ReactStars from 'react-stars'
+import Font from '../font'
 import { Link } from 'react-router-dom'
 import {Image, Icon } from 'semantic-ui-react'
 
@@ -11,7 +10,7 @@ export const Container = styled.div`
 	justify-content: ${props => props.justify || 'center'};
 	align-items: ${props => props.align || 'center'};
 	background-color:#fff;
-	width: 100%;
+	width: ${props => props.width || '100%'};
 	display: flex;
 	flex:1;
 	border-width: ${props => props.borderWidth || '0'};
@@ -52,7 +51,14 @@ export const RatingContainer = styled.div`
 	justify-content: ${props => props.justify || 'center'};
 	align-items: center;
 	flex: 1;
-	padding: ${props => props.padding || '2vh 1vw 2vh 2vw'};
+  max-width:${props => props.width || ''};
+  max-height:${props => props.height || ''};
+  border-width: ${props => props.bWidth || '0'};
+  border-style: ${props => props.bStyle || 'solid'};
+  border-color : ${props => props.bColor || '#ffd700'};
+  border-radius: ${props => props.bRadius || '0'};
+  margin:${props => props.margin || '2vh 0;' };
+	padding: ${props => props.padding || '1vh 2vw 1vh 2vw'};
 `
 export const ContentContainer = styled.div`
 	flex-direction: ${props => props.type || 'column'};
@@ -61,24 +67,11 @@ export const ContentContainer = styled.div`
 	flex: 3;
 	padding: ${props => props.padding || '1vh 3vw'};
 `
-export const NameDate = styled.div`
-	width:100%;
-	display:flex;
-	flex:2;
-	flex-direction: ${props => props.type || 'row'};
-	justify-content: ${props => props.justify || 'flex-start'};
-	padding:'0vh 0vw 1vh 0vw';
-	align-items: center;
-`
-export const TextContainer = styled.div`
-	width:100%;
-	display:flex;
-	flex:8;
-	align-items: center;
-`
 
-const AgentCard = ({
-	image = '',
+
+
+const AgentCardPortait = ({
+	image = 'https://dl.airtable.com/Jn9N7DISQmL2OTo9ulOj_22175523.jpg',
 	name = 'raysa',
 	city = 'jakarta',
 	rating = '4.0',
@@ -86,43 +79,25 @@ const AgentCard = ({
 	url=''
 }) => {
 	return (
-	<Container padding='0vh 2vw'>
-		<Link to={url} style={{width:'100%'}}>
-		<Container type="row" padding='0'>
-			<RatingContainer>
-				<Image src={image} size='small' rounded/>
-			</RatingContainer>
-			<ContentContainer>
-					<Font size={16} weight={500} margin='0vh 5vw 0vh 0' text={name}/>
-					<ReactStars value={rating}/>
-				<TextContainer>
-				</TextContainer>
-			</ContentContainer>
-		</Container>
-		</Link>
-		<Container type="row" padding='0'
-			borderWidth='1px 0px 0px 0px'
-			>
-		<Link to={`/company/${company.id}`} style={{width:'50%'}}>
-			<ImageListContainer>
-				<LogoContainer>
-					<Image
-						src={company.logoUrl}
-						style={{width:'30px',margin:0}}
-						/>
-				</LogoContainer>
-				<FontContainer size={12}>{company.name}</FontContainer>
-			</ImageListContainer>
-		</Link>
-			<ImageListContainer>
-				<LogoContainer>
-					<Icon name='point' style={{color:'#f28d2c'}}/>
-				</LogoContainer>
-				<FontContainer size={12}>{city}</FontContainer>
-			</ImageListContainer>
-		</Container>
-	</Container>
+  <Link to={url} style={{width:'180px', margin:'0px 10px'}}>
+  	<Container padding='0vh 2vw'  width='180px'>
+  		<Container padding='0' margin='0'>
+  			<RatingContainer margin='0'>
+  				<Image src={image} size='small' rounded/>
+  			</RatingContainer>
+  			<ContentContainer>
+  					<Font size={16} weight={500} text={name}/>
+  			</ContentContainer>
+  		</Container>
+      <Container type='row'>
+        <RatingContainer width='40px' height='40px' bWidth='3px' bRadius='30px' margin='0vh 3vw 0vh 0vw'>
+          <Font text={rating}/>
+        </RatingContainer>
+        <ReactStars value={rating}/>
+      </Container>
+  	</Container>
+  </Link>
 	)
 }
 
-export default AgentCard
+export default AgentCardPortait
