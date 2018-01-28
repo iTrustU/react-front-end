@@ -16,7 +16,7 @@ const unAuthenticatedMenu = [
 	{ title: 'register', url: '/signup' }
 ]
 const renderItem = props => {
-	if (!props.userData.isAuthenticate) {
+	if (!props.isAuthenticate) {
 		return AuthenticatedMenu.map(menu => {
 			if (menu.title.toLowerCase() !== 'logout') {
 				return (

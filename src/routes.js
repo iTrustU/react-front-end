@@ -20,7 +20,6 @@ class Routes extends React.Component {
   }
   componentWillMount () {
     const userData = JSON.parse(localStorage.getItem('userData'))
-    console.log('routes', userData);
     if (userData) {
       this.props.dispatch(updateIsAuthenticated(true, userData))
     } else {

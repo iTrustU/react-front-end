@@ -82,7 +82,7 @@ export const updateIsAuthenticated = (isAuthenticated, userData = {}, browserHis
     if (browserHistory) {
       browserHistory.push('/signin')
     } else {
-      dispatch(push('/signin'))
+      // dispatch(push('/signin'))
     }
   }
 }

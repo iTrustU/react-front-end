@@ -19,7 +19,7 @@ export const MainContainer = styled.div`
 	justify-content: flex-start;
 	background-color: #f5f5f5;
 	align-items: center;
-	padding:0vh 4vw;
+	padding:0vh 0vw;
   @media (max-width:750px){
     flex:1
   }
@@ -30,7 +30,7 @@ export const GeneralContainer = styled.div`
 	align-items: center;
 	width:100%;
 	display:flex;
-	padding: ${props => props.padding || '2vh 3vw'};
+	padding: ${props => props.padding || '2vh 4vw'};
 	border-bottom: 1px solid #ddd;
 `
 export const ProfileContainer = styled.div`

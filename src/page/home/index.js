@@ -12,12 +12,14 @@ import {
 	// ProfileContainer,
 } from './components/StyledComponents'
 
-import { Header, Drawer, AgentCard  } from '../../components'
+import { Header, Drawer, AgentCard, LocationHeader  } from '../../components'
 import { withRouter } from 'react-router-dom'
 
 class Home extends Component {
 	state = {
 		showDrawer: false,
+		filterByCity:false,
+		userCity:'jakarta',
 		userData:[],
 	}
 	changeDrawer = () => {
@@ -36,15 +38,13 @@ class Home extends Component {
 			alert('sorry something wrong')
 		})
 	}
-	getPhoneNumber(number){
-		if (number.substring(0,1) === '0' ) {
-			let newNumber = number.split('')
-			newNumber.splice(0,1,'+62').join('')
-			console.log(newNumber.join(''));
-			return newNumber.join('')
-		}
-		return number
+
+	changeFilterByCityStatus = () => {
+		this.setState({
+			filterByCity:!this.state.filterByCity
+		})
 	}
+
 	render( ) {
 		if (this.state.userData.length === 0) {
 			return (
@@ -66,6 +66,10 @@ class Home extends Component {
 				<Container name="Container">
 					<Drawer show={this.state.showDrawer} />
 					<MainContainer name="MainContainer">
+						<LocationHeader
+							status={this.state.filterByCity}
+							city={this.state.userCity}
+							onStatusChange={this.changeFilterByCityStatus}/>
             <GeneralContainer>
               {userData.map(data =>
                 <AgentCard image={data.profile.profilePicture}
