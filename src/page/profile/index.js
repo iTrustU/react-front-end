@@ -27,14 +27,11 @@ class Profile extends Component {
 			showDrawer: !this.state.showDrawer
 		})
 	}
-	componentDidMount() {
-		get({url:`users/${this.props.match.params.id}?filter[include]=profile&filter[include]=insuranceCompany`})
+	getData(id){
+		get({url:`users/${id}?filter[include]=profile&filter[include]=insuranceCompany`})
 		.then(res => {
-			// this.setState({
-			// 	userData:res.data
-			// })
 
-			get({url:`users/${this.props.match.params.id}/reviews/count`})
+			get({url:`users/${id}/reviews/count`})
 			.then(_res => {
 				this.setState({
 					finalRating:_res.data.count,
@@ -43,23 +40,18 @@ class Profile extends Component {
 		}).catch(err => {
 			console.log(err);
 		})
-
 		}).catch(err=> {
 			alert('upssss something wrong')
 		})
-
 	}
-  //
-	// shouldComponentUpdate(newProps, newState){
-	// 	if (newProps.match.params.id !== this.props.match.params.id ) {
-	// 		console.log('masuk sini');
-	// 		return true
-	// 	}else if(newState.userData !== this.state.userData){
-	// 		console.log('masuk sini1');
-	// 		return true
-	// 	}
-	// 	return false
-	// }
+	componentDidMount() {
+		this.getData(this.props.match.params.id)
+	}
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.match.params.id !== this.props.match.params.id ) {
+			this.getData(nextProps.match.params.id)
+		}
+	}
 	getPhoneNumber(number){
 		if (number.substring(0,1) === '0' ) {
 			let newNumber = number.split('')

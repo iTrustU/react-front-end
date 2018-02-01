@@ -41,7 +41,7 @@ class Home extends Component {
 		const self = this
 		if ("geolocation" in navigator) {
 			var watchID = navigator.geolocation.getCurrentPosition(function(position) {
-				axios.get(`http://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&language=idn&region=idn`)
+				axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&language=idn&region=idn`)
 				.then(({data}) => {
 					const newUserCity = data &&  data.results && data.results[6] &&
 															data.results[6].formatted_address && data.results[6].formatted_address.split(',')[0] || ''

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import ReactStars from 'react-stars'
 import Font from '../font'
 import { Link } from 'react-router-dom'
-import {Image, Icon } from 'semantic-ui-react'
+import {Image } from 'semantic-ui-react'
 
 export const Container = styled.div`
 	flex-direction: ${props => props.type || 'column'};

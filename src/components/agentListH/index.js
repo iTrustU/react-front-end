@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {  Button } from 'semantic-ui-react'
 import styled from 'styled-components'
 import AgentCardPortait from '../agentCardPortait'
 import Font from '../font'
@@ -8,7 +7,6 @@ export const Container = styled.div`
 	flex-direction: ${props => props.type || 'column'};
 	justify-content: ${props => props.justify || 'center'};
 	align-items: center;
-	overflow: hidden;
 	width:100%;
 	padding: ${props => props.padding || '2vh 3vw'};
 `
@@ -19,10 +17,10 @@ export const ListContainer = styled.div`
   flex-direction: ${props => props.type || 'column'};
   justify-content: ${props => props.justify || 'center'};
   align-items: center;
+	display:flex;
 	overflow:auto;
   width:100%;
 	height:100%;
-  display:flex;
   padding: ${props => props.padding || '2vh 0vw'};
 `
 
@@ -35,7 +33,7 @@ const RenderData = (datas=[])=> {
 		)
 	}
 	return(
-		<ListContainer padding='0px 0px 0px 0px' type='row' justify='flex-start'>
+		<ListContainer padding='0px 0px 30px 0px' type='row' justify='flex-start'>
 				<AgentCardPortait/>
 				<AgentCardPortait/>
 				<AgentCardPortait/>

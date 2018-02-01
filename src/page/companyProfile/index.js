@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import { connect } from 'react-redux'
-import { Image, Icon, Loader, Button } from 'semantic-ui-react'
+import { Image, Loader, Button } from 'semantic-ui-react'
 import { get } from '../../service'
 // import ReactStars from 'react-stars'
 import {
@@ -8,8 +8,6 @@ import {
 	MainContainer,
 	GeneralContainer,
 	FontContainer,
-	LogoContainer,
-	ImageListContainer,
 	ProfileContainer,
 } from './components/StyledComponents'
 
@@ -26,8 +24,8 @@ class CompanyProfile extends Component {
 			showDrawer: !this.state.showDrawer
 		})
 	}
-	componentDidMount() {
-		get({url:`InsuranceCompanies/${this.props.match.params.id}`})
+	getData(id) {
+		get({url:`InsuranceCompanies/${id}`})
 		.then(res => {
 			this.setState({
 				companyData:res.data
@@ -36,19 +34,15 @@ class CompanyProfile extends Component {
 		}).catch(err=> {
 			alert('upssss something wrong')
 		})
-
 	}
-  //
-	// shouldComponentUpdate(newProps, newState){
-	// 	if (newProps.match.params.id !== this.props.match.params.id ) {
-	// 		console.log('masuk sini');
-	// 		return true
-	// 	}else if(newState.userData !== this.state.userData){
-	// 		console.log('masuk sini1');
-	// 		return true
-	// 	}
-	// 	return false
-	// }
+	componentDidMount() {
+		this.getData(this.props.match.params.id)
+	}
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.match.params.id !== this.props.match.params.id ) {
+			this.getData(nextProps.match.params.id)
+		}
+	}
 	getPhoneNumber(number){
 		if (number.substring(0,1) === '0' ) {
 			let newNumber = number.split('')
