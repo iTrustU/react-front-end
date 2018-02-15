@@ -28,18 +28,22 @@ export const loginHandler = (event, loginData = {}) => dispatch => {
   if (name === 'email') {
     servicePost({url:'users/custom-login',body:{email, password}})
     .then(res => {
-      const userData = {
-        ...res.data,
-        deviceToken:localStorage.getItem('pushNotifToken')||''
-      }
-      servicePost({url:'users/update-device-token',
-        access_token:userData.access_token,
-        body:{
-          email,
-          deviceToken:userData.deviceToken
+      if (res.data.status) {
+        const userData = {
+          ...res.data,
+          deviceToken:localStorage.getItem('pushNotifToken')||''
         }
-      })
-      dispatch(updateIsAuthenticated(true, userData))
+        servicePost({url:'users/update-device-token',
+          access_token:userData.access_token,
+          body:{
+            email,
+            deviceToken:userData.deviceToken
+          }
+        })
+        dispatch(updateIsAuthenticated(true, userData))
+      }else{
+        alert(res.data.message)
+      }
     }).catch(err => {
       console.log(err);
     })
@@ -50,18 +54,22 @@ export const registerHandler = (loginData = {}) => dispatch => {
   const { email, password, aajiId } = loginData
     servicePost({url:'users/register',body:{email,password,insuranceAgentId:aajiId}})
     .then(res => {
-      const userData = {
-        ...res.data,
-        deviceToken:localStorage.getItem('pushNotifToken')||''
-      }
-      servicePost({url:'users/update-device-token',
-        access_token:userData.access_token,
-        body:{
-          email,
-          deviceToken:userData.deviceToken
+      if(res.data.status){
+        const userData = {
+          ...res.data,
+          deviceToken:localStorage.getItem('pushNotifToken')||''
         }
-      })
-      dispatch(updateIsAuthenticated(true, userData))
+        servicePost({url:'users/update-device-token',
+          access_token:userData.access_token,
+          body:{
+            email,
+            deviceToken:userData.deviceToken
+          }
+        })
+        dispatch(updateIsAuthenticated(true, userData))
+      }else {
+        alert(res.data.message)
+      }
     }).catch(err => {
       console.log(err);
     })

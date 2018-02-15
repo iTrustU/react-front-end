@@ -21,6 +21,7 @@ class Home extends Component {
 		showDrawer: false,
 		filterByCity:false,
 		userCity:'',
+		location:'',
 		userData:[],
 	}
 	changeDrawer = () => {
@@ -29,18 +30,24 @@ class Home extends Component {
 		})
 	}
 	componentDidMount() {
-		get({url:`users?filter[include]=profile&filter[include]=insuranceCompany`})
+		get({url:'profiles?filter[include][user]=insuranceCompany'})
 		.then(res => {
 			this.setState({
 				userData:res.data
 			})
-      console.log(this.state.userData);
 		}).catch(err => {
 			alert('sorry something wrong')
 		})
 		const self = this
 		if ("geolocation" in navigator) {
 			var watchID = navigator.geolocation.getCurrentPosition(function(position) {
+				const newLocation = {
+					lat:position.coords.latitude,
+					lng:position.coords.longitude
+				}
+				self.setState({
+					location:newLocation
+				})
 				axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&language=idn&region=idn`)
 				.then(({data}) => {
 					const newUserCity = data &&  data.results && data.results[6] &&
@@ -56,8 +63,15 @@ class Home extends Component {
 	}
 
 	changeFilterByCityStatus = () => {
-		this.setState({
-			filterByCity:!this.state.filterByCity
+		const {location} = this.state
+		get({url:`profiles?filter[include][user]=insuranceCompany&where[location][near]=${location.lat},${location.lng}`})
+		.then(res => {
+			this.setState({
+				userData:res.data,
+				filterByCity:!this.state.filterByCity
+			})
+		}).catch(err => {
+			alert('sorry something wrong')
 		})
 	}
 
@@ -88,12 +102,13 @@ class Home extends Component {
 							onStatusChange={this.changeFilterByCityStatus}/>
             <GeneralContainer>
               {userData.map(data =>
-                <AgentCard image={data.profile.profilePicture}
-                  name={data.profile.name}
-                  url={`/profile/${data.id}`}
-                  rating={data.profile.finalRating}
-                  city={data.profile.city}
-                  company={data.insuranceCompany}
+                <AgentCard image={data.profilePicture}
+									key={data.userId}
+                  name={data.name}
+                  url={`/profile/${data.userId}`}
+                  rating={data.finalRating}
+                  city={data.city}
+                  company={data.user.insuranceCompany}
                   />)}
 
             </GeneralContainer>
