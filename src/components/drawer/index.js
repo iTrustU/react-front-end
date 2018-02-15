@@ -34,9 +34,9 @@ const renderItem = props => {
 			)
 		})
 	}
-	return unAuthenticatedMenu.map(menu => {
+	return unAuthenticatedMenu.map((menu,index) => {
 		return (
-			<ItemContainer>
+			<ItemContainer key={index}>
 				<Link to={menu.url}>{menu.title}</Link>
 			</ItemContainer>
 		)

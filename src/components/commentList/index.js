@@ -25,7 +25,6 @@ export const ListContainer = styled.div`
 `
 
 const RenderData = (datas=[])=> {
-	console.log('------datas',datas);
 	if (datas.length === 0) {
 		return(
 			<ListContainer>
@@ -53,7 +52,6 @@ class CommentList extends Component {
 	componentDidMount(){
 		get({url:`users/${this.props.userId}/reviews`})
 		.then(res => {
-			console.log(res.data);
 			this.setState({
 				reviews:res.data
 			})

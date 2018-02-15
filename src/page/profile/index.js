@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 // import { connect } from 'react-redux'
 import { Image, Icon, Loader, Button } from 'semantic-ui-react'
 import { get } from '../../service'
+import {Link} from 'react-router-dom'
 // import ReactStars from 'react-stars'
 import {
 	Container,
@@ -20,7 +21,7 @@ class Profile extends Component {
 	state = {
 		showDrawer: false,
 		userData:'',
-		finalRating:''
+		finalRating:0
 	}
 	changeDrawer = () => {
 		this.setState({
@@ -53,13 +54,13 @@ class Profile extends Component {
 		}
 	}
 	getPhoneNumber(number){
+		let newNumber = ''
 		if (number.substring(0,1) === '0' ) {
-			let newNumber = number.split('')
+			  newNumber = number.split('')
 			newNumber.splice(0,1,'+62').join('')
-			console.log(newNumber.join(''));
 			return newNumber.join('')
 		}
-		return number
+		return newNumber
 	}
 	render( ) {
 		if (this.state.userData === '') {
@@ -108,10 +109,12 @@ class Profile extends Component {
 						<GeneralContainer>
 							<ImageListContainer>
 								<LogoContainer>
+									<Link to={`/company/${userData.insuranceCompanyId}`}>
 									<Image
 										src={userData.insuranceCompany.logoUrl}
 										style={{width:'50px',margin:0}}
 										/>
+								</Link>
 								</LogoContainer>
 								<FontContainer size={16}>{userData.insuranceCompany.name}</FontContainer>
 							</ImageListContainer>
