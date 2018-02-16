@@ -47,6 +47,7 @@ class RatingForm extends Component {
 				this.setState({
 					ratingData: {...newRatingData}
 				})
+				this.props.onClick()
 				alert('Review success')
 			})
 			.catch(err => {

@@ -21,6 +21,7 @@ class Profile extends Component {
 	state = {
 		showDrawer: false,
 		userData:'',
+		update:false,
 		finalRating:0
 	}
 	changeDrawer = () => {
@@ -31,7 +32,6 @@ class Profile extends Component {
 	getData(id){
 		get({url:`users/${id}?filter[include]=profile&filter[include]=insuranceCompany`})
 		.then(res => {
-
 			get({url:`users/${id}/reviews/count`})
 			.then(_res => {
 				this.setState({
@@ -52,6 +52,11 @@ class Profile extends Component {
 		if (nextProps.match.params.id !== this.props.match.params.id ) {
 			this.getData(nextProps.match.params.id)
 		}
+	}
+	changeUpdate=() => {
+		this.setState({
+			update:!this.state.update
+		})
 	}
 	getPhoneNumber(number){
 		let newNumber = ''
@@ -126,10 +131,10 @@ class Profile extends Component {
 							</ImageListContainer>
 						</GeneralContainer>
 						<GeneralContainer>
-							<RatingForm userId={userData.id}/>
+							<RatingForm onClick={this.changeUpdate} userId={userData.id}/>
 						</GeneralContainer>
 						<GeneralContainer>
-							<CommentList userId={userData.id}/>
+							<CommentList isUpdate={this.state.update} userId={userData.id}/>
 						</GeneralContainer>
 					</MainContainer>
 				</Container>

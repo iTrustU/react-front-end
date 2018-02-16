@@ -49,13 +49,21 @@ class CommentList extends Component {
 	state={
 		reviews:[]
 	}
-	componentDidMount(){
-		get({url:`users/${this.props.userId}/reviews`})
+	getData(id){
+		get({url:`users/${id}/reviews`})
 		.then(res => {
 			this.setState({
 				reviews:res.data
 			})
 		})
+	}
+	componentDidMount(){
+		this.getData(this.props.userId)
+	}
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.isUpdate !== this.props.isUpdate ) {
+			this.getData(this.props.userId)
+		}
 	}
   render(){
     return(
