@@ -36,7 +36,6 @@ const RenderData = (datas = []) => {
 	return (
 		<ListContainer padding="0px 0px 30px 0px" type="row" justify="flex-start">
 			{datas.map(agent => {
-				console.log(agent.profile)
 				return <AgentCardPortait
 					key={agent.id}
 					image={agent.profile.profilePicture}
@@ -55,13 +54,11 @@ class AgentListH extends Component {
 		agents: []
 	}
 	componentDidMount() {
-		console.log('masuk sini', this.props)
 		get({
 			url: `users?filter[include]=profile&filter[where][insuranceCompanyId]=${
 				this.props.companyId
 			}`
 		}).then(res => {
-			console.log(res.data)
 			this.setState({
 				agents: res.data
 			})

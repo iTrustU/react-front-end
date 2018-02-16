@@ -34,6 +34,7 @@ class Profile extends Component {
 		.then(res => {
 			get({url:`users/${id}/reviews/count`})
 			.then(_res => {
+				res.data.profile.phone=this.getPhoneNumber(res.data.profile.phone)
 				this.setState({
 					finalRating:_res.data.count,
 					userData:res.data
@@ -60,6 +61,7 @@ class Profile extends Component {
 	}
 	getPhoneNumber(number){
 		let newNumber = ''
+		newNumber = number
 		if (number.substring(0,1) === '0' ) {
 			  newNumber = number.split('')
 			newNumber.splice(0,1,'+62').join('')
