@@ -34,7 +34,8 @@ class RatingForm extends Component {
 			body: {
 				comment: ratingData.comment,
 				rating: ratingData.rating,
-				userId: this.props.userId
+				userId: this.props.userId,
+				phone:ratingData.phoneNumber,
 			}
 		})
 			.then(res => {
