@@ -38,6 +38,23 @@ class Dashboard extends Component {
 			alert('upssss something wrong')
 		})
 	}
+	renderQrcode(qrCode){
+		if (qrCode === '' || qrCode === null || qrCode === undefined) {
+			return null
+		} else {
+			return (
+				<GeneralContainer>
+					<ProfileContainer>
+					<Image
+						src={qrCode}
+						style={{height:'150px',margin:0}}
+						/>
+					</ProfileContainer>
+					<Button color='orange'>Create bussines card</Button>
+				</GeneralContainer>
+			)
+		}
+	}
 	render() {
 		const { userDetail } = this.props.userData
 		return (
@@ -79,15 +96,7 @@ class Dashboard extends Component {
 									<FontContainer size={16}>{userDetail.profile.city}</FontContainer>
 								</ImageListContainer>
 							</GeneralContainer>
-							<GeneralContainer>
-								<ProfileContainer>
-								<Image
-									src={userDetail.profile.qrImageUrl}
-									style={{height:'150px',margin:0}}
-									/>
-								</ProfileContainer>
-								<Button color='orange'>Create bussines card</Button>
-							</GeneralContainer>
+							{this.renderQrcode(userDetail.profile.qrImageUrl)}
 						<GeneralContainer>
 							<CommentList userId={userDetail.id}/>
 						</GeneralContainer>
