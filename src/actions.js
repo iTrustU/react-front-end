@@ -1,5 +1,4 @@
 import { push } from 'react-router-redux'
-// import firebase from './utils/firebase'
 import { post as servicePost } from './service'
 
 export const authenticateSuccess = () => ({
@@ -59,7 +58,7 @@ export const registerHandler = (loginData = {}) => dispatch => {
 		body: { email, password, insuranceAgentId: aajiId }
 	})
 		.then(res => {
-			if (res.data.status) {
+			if (res.data.success) {
 				const userData = {
 					...res.data,
 					deviceToken: localStorage.getItem('pushNotifToken') || ''
@@ -78,6 +77,7 @@ export const registerHandler = (loginData = {}) => dispatch => {
 			}
 		})
 		.catch(err => {
+			alert(err.message)
 			console.log(err)
 		})
 }

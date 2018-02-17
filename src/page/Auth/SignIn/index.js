@@ -31,8 +31,10 @@ class SignIn extends Component {
 			this.props.isAuthenticated
 			? <Redirect to='/dashboard' />
 			: (<Container>
+				<Link to='/'>
 			<Image style={{height:'100px'}} src='https://firebasestorage.googleapis.com/v0/b/itrustu-a10b5.appspot.com/o/iTrustU-logo-500px.png?alt=media&token=8bfa404c-8db6-4e5c-ab1d-a9ddee2ab2fa'/>
-				<FormContainer>
+			</Link>
+			<FormContainer>
 					<WelcomeHeader>
 						<h3>Sign in to ITrustU</h3>
 					</WelcomeHeader>

@@ -27,6 +27,7 @@ export const MainContainer = styled.div`
 export const GeneralContainer = styled.div`
 	flex-direction: ${props => props.type || 'column'};
 	justify-content: ${props => props.justify || 'center'};
+	flex:1;
 	align-items: center;
 	width:100%;
 	display:flex;

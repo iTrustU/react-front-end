@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Image, Icon } from 'semantic-ui-react'
+import { Image, Icon, Button } from 'semantic-ui-react'
 // import ReactStars from 'react-stars'
 import {
 	Container,
@@ -62,23 +62,32 @@ class Dashboard extends Component {
 						</GeneralContainer>
 							<Rating value={userDetail.profile.finalRating.toFixed(1)}
 								totalRating={this.state.finalRating} />
-						<GeneralContainer>
-							<ImageListContainer>
-								<LogoContainer>
-									<Image
-										src={userDetail.insuranceCompany.logoUrl}
-										style={{width:'50px',margin:0}}
-										/>
-								</LogoContainer>
-								<FontContainer size={16}>{userDetail.insuranceCompany.name}</FontContainer>
-							</ImageListContainer>
-							<ImageListContainer>
-								<LogoContainer>
-									<Icon name='point' style={{color:'#f28d2c'}}/>
-								</LogoContainer>
-								<FontContainer size={16}>{userDetail.profile.city}</FontContainer>
-							</ImageListContainer>
-						</GeneralContainer>
+							<GeneralContainer>
+								<ImageListContainer>
+									<LogoContainer>
+										<Image
+											src={userDetail.insuranceCompany.logoUrl}
+											style={{width:'50px',margin:0}}
+											/>
+									</LogoContainer>
+									<FontContainer size={16}>{userDetail.insuranceCompany.name}</FontContainer>
+								</ImageListContainer>
+								<ImageListContainer>
+									<LogoContainer>
+										<Icon name='point' style={{color:'#f28d2c'}}/>
+									</LogoContainer>
+									<FontContainer size={16}>{userDetail.profile.city}</FontContainer>
+								</ImageListContainer>
+							</GeneralContainer>
+							<GeneralContainer>
+								<ProfileContainer>
+								<Image
+									src={userDetail.profile.qrImageUrl}
+									style={{height:'150px',margin:0}}
+									/>
+								</ProfileContainer>
+								<Button color='orange'>Create bussines card</Button>
+							</GeneralContainer>
 						<GeneralContainer>
 							<CommentList userId={userDetail.id}/>
 						</GeneralContainer>
