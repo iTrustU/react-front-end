@@ -38,6 +38,19 @@ class Dashboard extends Component {
 			alert('upssss something wrong')
 		})
 	}
+	GenerateBussinesCard= () =>  {
+		const {userData} = this.props
+		get({url:`Profiles/generate-business-card?userId=${userData.userDetail.id}&access_token=${userData.token}`})
+		.then(res => {
+			if (res.data.success) {
+				window.open(res.data.businessCardLink, "_blank")
+			}else{
+				alert(res.data.message)
+			}
+		}).catch(err=> {
+			alert('upssss something wrong')
+		})
+	}
 	renderQrcode(qrCode){
 		if (qrCode === '' || qrCode === null || qrCode === undefined) {
 			return null
@@ -50,7 +63,9 @@ class Dashboard extends Component {
 						style={{height:'150px',margin:0}}
 						/>
 					</ProfileContainer>
-					<Button color='orange'>Create bussines card</Button>
+					<Button
+						onClick = {this.GenerateBussinesCard}
+						color='orange'>Create bussines card</Button>
 				</GeneralContainer>
 			)
 		}
