@@ -8,6 +8,7 @@ import {Font} from '../../components'
 
 const AuthenticatedMenu = [
 	{ title: 'home', url: '/' },
+	{ title: 'dashboard', url: '/dashboard'},
 	{ title: 'Logout', url: '' }
 ]
 const unAuthenticatedMenu = [
