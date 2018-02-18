@@ -8,11 +8,15 @@ import {Font} from '../../components'
 
 const AuthenticatedMenu = [
 	{ title: 'home', url: '/' },
+	{ title: 'trisa', url: '/trisa' },
+	{ title: 'map view', url: '/map' },
 	{ title: 'dashboard', url: '/dashboard'},
 	{ title: 'Logout', url: '' }
 ]
 const unAuthenticatedMenu = [
 	{ title: 'home', url: '/' },
+	{ title: 'trisa', url: '/trisa' },
+	{ title: 'map view', url: '/map' },
 	{ title: 'login', url: '/signin' },
 	{ title: 'register', url: '/signup' }
 ]

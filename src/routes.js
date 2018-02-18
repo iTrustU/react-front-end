@@ -13,6 +13,7 @@ import Profile from './page/profile'
 import Home from './page/home'
 import Trisa from './page/trisa'
 import NotFoundPage from './page/NotFoundPage'
+import Map from './page/map'
 // import firebase from './utils/firebase'
 import { updateIsAuthenticated } from './actions'
 
@@ -40,6 +41,7 @@ class Routes extends React.Component {
           <Route path='/signin' component={SignIn} />
           <Route path='/signup' component={SignUp} />
           <Route path='/trisa' component={Trisa} />
+          <Route path='/map' component={Map} />
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/profile/:id' component={Profile} />
           <Route path='/company/:id' component={CompanyProfile} />
