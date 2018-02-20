@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Loader, Button, Input, Card  } from 'semantic-ui-react'
 import axios from 'axios'
+import shortid from 'shortid'
 import { get } from '../../service'
+import moment from 'moment'
 import { 
   ChatBuble,
   ChatContainer,
@@ -19,40 +21,80 @@ import { withRouter } from 'react-router-dom'
 
 class Home extends Component {
 	state = {
-    chats:[
-			{
-				sender:'bot',
-				message: 'Hallo',
-				time: '1 hour ago'
-			},
-			{
-				sender:'me',
-				message: 'Hallo juga',
-				time: '25 minutes ago'
-			},
-			{
-				sender:'bot',
-				message: 'Kamu siapa?',
-				time: '24 minutes ago'
-			},
-			{
-				sender:'bot',
-				message: 'Saya siapa?',
-				time: '23 minutes ago'
-			},
-		]
+    chats:[],
+		chatId: '',
+		chatMessage: ''
 	}
+
 	changeDrawer = () => {
 		this.setState({
 			showDrawer: !this.state.showDrawer
 		})
 	}
-	componentDidMount() {
 
+	componentDidMount() {
+		this.setChatId()
 	}
 
+	setChatId = () => {
+		this.setState({
+			chatId: shortid.generate()
+		})
+	}
 
-	render( ) {
+	setChatMessage = ({ key, target: { value: chatMessage } }) => {
+		if (chatMessage.length > 1) {
+			this.setState({
+				chatMessage
+			}, () => {
+				if (key === 'Enter') {
+					this.sendMessage(this.state.chatMessage)
+					this.setState({
+						chatMessage: ''
+					})
+				}
+			})
+		}
+	}
+
+	sendMessage = async (chatMessage) =>{
+		moment.locale('id')
+		try {
+			const messagePostBody = {
+				id: this.state.chatId,
+				message: chatMessage
+			}
+			this.setState({
+				chats: [
+					...this.state.chats,
+					{
+						...messagePostBody,
+						sender: 'me',
+						time: moment().startOf('minutes').fromNow()
+					}
+				]
+			})
+			
+			const sendChatResponse = await axios.post('http://udin.us:3000/local', messagePostBody)		
+			if (sendChatResponse) {
+				this.setState({
+					chats: [
+						...this.state.chats,
+						...sendChatResponse.data.map(({ sender, data }) => ({
+							id: this.state.chatId,
+							sender,
+							message: data,
+							time: moment().startOf('minutes').fromNow()
+						}))
+					]
+				})
+			}
+		} catch (error) {
+			throw new Error('Chat Error', error)	
+		}	
+	}
+
+	render() {
 		const { chats } = this.state
 		return (
 			<div>
@@ -62,7 +104,7 @@ class Home extends Component {
 					<MainContainer name="MainContainer">
             <GeneralContainer name="ChatList">
 							<ChatContainer>
-								{chats.map(chat => {
+								{chats.map((chat, index) => {
 									return (
 										<div
 											style={{
@@ -70,6 +112,7 @@ class Home extends Component {
 												marginTop: 20,
 												justifyContent: chat.sender === 'bot' ? 'flex-end' : 'flex-start'
 											}}
+											key={index}
 										>
 											<Card
 												color={ chat.sender === 'bot' ? 'orange' : 'teal' }
@@ -110,6 +153,7 @@ class Home extends Component {
 									borderRadius: 20
 								}}
 								placeholder='Input text here'
+								onKeyUp={this.setChatMessage}
 							/>
             </GeneralContainer>
 					</MainContainer>
