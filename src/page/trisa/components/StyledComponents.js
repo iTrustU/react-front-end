@@ -15,7 +15,7 @@ export const MainContainer = styled.div`
 	display: flex;
 	flex-direction: column;
   flex:8;
-	height:91.5vh;
+	min-height:87vh;
   overflow:hidden;
 	justify-content: space-between;
 	background-color: #f5f5f5;
@@ -62,4 +62,32 @@ export const ImageListContainer = styled.div`
 	align-items: center ;
 	padding: 0vh 5vw;
 	margin:1vh 5vw;
+`
+
+
+export const ChatBuble = styled.div`
+  padding: 20px;
+  background: #000;
+  min-width: 100px;
+  width: 200px;
+  color: #fff;
+`
+
+export const ChatContainer = styled.div`
+  margin: auto;
+  padding: 10px;
+  width: 100%;
+`
+
+export const ReplyContainer = styled.div`
+  display: flex;
+  flex-wrap: no-wrap;
+`
+
+export const ReplyBox = styled.input`
+  border-radius: 20px;
+`
+export const ReplyButton = styled.button`
+  background: #ccc;  
+  color: #fff;
 `
