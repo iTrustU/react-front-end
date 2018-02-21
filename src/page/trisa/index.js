@@ -4,7 +4,7 @@ import axios from 'axios'
 import shortid from 'shortid'
 import { get } from '../../service'
 import moment from 'moment'
-import { 
+import {
   ChatBuble,
   ChatContainer,
   ReplyContainer,
@@ -56,7 +56,7 @@ class Home extends Component {
 			})
 		}
 	}
-
+  
 	sendMessage = async (chatMessage) =>{
 		moment.locale('id')
 		try {
@@ -74,8 +74,8 @@ class Home extends Component {
 					}
 				]
 			})
-			
-			const sendChatResponse = await axios.post('http://udin.us:3000/local', messagePostBody)		
+
+			const sendChatResponse = await axios.post('http://udin.us:3000/local', messagePostBody)
 			if (sendChatResponse) {
 				this.setState({
 					chats: [
@@ -90,8 +90,8 @@ class Home extends Component {
 				})
 			}
 		} catch (error) {
-			throw new Error('Chat Error', error)	
-		}	
+			throw new Error('Chat Error', error)
+		}
 	}
 
 	render() {
@@ -125,7 +125,7 @@ class Home extends Component {
 														fontSize: '11px',
 														padding: '10px'
 													}}>
-														{ chat.time } 
+														{ chat.time }
 													</p>
 												</Card.Description>
 											</Card>
@@ -150,7 +150,8 @@ class Home extends Component {
 									labelPosition: 'right',
 									icon: 'send',
 									content: 'Send',
-									size: 'huge'
+									size: 'huge',
+                  onClick: this.setChatMessage
 								}}
 								style={{
 									width: '100%',

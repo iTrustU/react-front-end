@@ -40,10 +40,12 @@ class Dashboard extends Component {
 	}
 	GenerateBussinesCard= () =>  {
 		const {userData} = this.props
+		console.log(userData);
 		get({url:`Profiles/generate-business-card?userId=${userData.userDetail.id}&access_token=${userData.token}`})
 		.then(res => {
 			if (res.data.success) {
-				window.open(res.data.businessCardLink, "_blank")
+				console.log('bussines card',res.data.businessCardLink )
+				window.open(res.data.businessCardLink)
 			}else{
 				alert(res.data.message)
 			}
