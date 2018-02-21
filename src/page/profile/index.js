@@ -52,6 +52,8 @@ class Profile extends Component {
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.match.params.id !== this.props.match.params.id ) {
 			this.getData(nextProps.match.params.id)
+		}else if (true) {
+
 		}
 	}
 	changeUpdate=() => {

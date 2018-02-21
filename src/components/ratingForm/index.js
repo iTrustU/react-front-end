@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 // import { connect } from 'react-redux'
-import { Input, TextArea, Button } from 'semantic-ui-react'
+import { Input, TextArea, Button, Modal,Icon } from 'semantic-ui-react'
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+} from 'react-share';
 import ReactStars from 'react-stars'
 import {
 	Container,
@@ -16,7 +20,9 @@ class RatingForm extends Component {
 			comment: '',
 			rating: '4.0'
 		},
-		isSubmit: false
+		sharedComment:'',
+		isSubmit: false,
+		isModalActive:false,
 	}
 
 	handleInput = event => {
@@ -26,6 +32,17 @@ class RatingForm extends Component {
 		this.setState({
 			ratingData: ratingData
 		})
+	}
+	changeModal = () => {
+		this.setState({
+			isModalActive:!this.state.isModalActive
+		})
+	}
+	modalClose = () => {
+		this.setState({
+			isModalActive:!this.state.isModalActive
+		})
+		this.props.onClick()
 	}
 	onSubmit = () => {
 		const { ratingData } = this.state
@@ -39,6 +56,9 @@ class RatingForm extends Component {
 			}
 		})
 			.then(res => {
+				this.setState({
+					sharedComment:this.state.ratingData.comment
+				})
         const newRatingData = {
           phoneNumber: '',
           comment: '',
@@ -47,8 +67,8 @@ class RatingForm extends Component {
 				this.setState({
 					ratingData: {...newRatingData}
 				})
-				this.props.onClick()
 				alert('Review success')
+				this.changeModal()
 			})
 			.catch(err => {
 				alert('review gagal kesalahan sistem')
@@ -79,6 +99,32 @@ class RatingForm extends Component {
 	render() {
 		return (
 			<Container justify="center" align="flex-start" padding="2vh 0vw">
+				<Modal size='tiny' open={this.state.isModalActive} onClose={this.close}>
+				<Modal.Header>
+					Share your review
+				</Modal.Header>
+				<Modal.Content>
+					<Container type='row'>
+					<FacebookShareButton
+						quote={this.state.sharedComment}
+						url={'https://itrustu-a10b5.firebaseapp.com/profile/${this.props.userId}'}>
+						<Icon  name='facebook' size='huge'/>
+					</FacebookShareButton>
+					<TwitterShareButton
+						title={this.state.sharedComment}
+						hashtags={['iTrustU']}
+						url={'https://itrustu-a10b5.firebaseapp.com/profile/${this.props.userId}'}>
+						<Icon  name='twitter' size='huge'/>
+					</TwitterShareButton>
+				</Container>
+				</Modal.Content>
+				<Modal.Actions>
+					<Button onClick={this.modalClose}>
+						Close
+					</Button>
+				</Modal.Actions>
+			</Modal>
+
 				<HeaderContainer
 					type="row"
 					justify="space-between"
