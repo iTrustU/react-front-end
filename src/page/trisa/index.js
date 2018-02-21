@@ -96,7 +96,7 @@ class Home extends Component {
 				]
 			})
 
-			const sendChatResponse = await axios.post('http://udin.us:3000/local', messagePostBody)
+			const sendChatResponse = await axios.post('https://udin.us/trisa/local', messagePostBody)
 			if (sendChatResponse) {
 				this.setState({
 					chats: [
