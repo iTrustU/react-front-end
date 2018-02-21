@@ -49,6 +49,14 @@ class Profile extends Component {
 	componentDidMount() {
 		this.getData(this.props.match.params.id)
 	}
+	shouldComponentUpdate(nextProps, nextState) {
+		return nextState.userData !== this.state.userData || nextState.update !== this.state.update
+	}
+	componentDidUpdate(prevProps, prevState) {
+		if(prevState.update !== this.state.update){
+			this.getData(this.props.match.params.id)
+		}
+	}
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.match.params.id !== this.props.match.params.id ) {
 			this.getData(nextProps.match.params.id)
