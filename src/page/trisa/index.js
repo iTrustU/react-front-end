@@ -138,7 +138,11 @@ class Home extends Component {
               name="CreateChat"
               padding="5px 0px"
               type='row'
-              backgroundColor='white'
+							backgroundColor='white'
+							style={{
+								position: 'fixed',
+								bottom: 0
+							}}
 						>
 							<Input
 								action={{
