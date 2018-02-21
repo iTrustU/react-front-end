@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {
-	Loader,
-	Button,
+	// Loader,
+	// Button,
 	Input,
 	Card,
 	Rating
@@ -12,43 +12,31 @@ import { get } from '../../service'
 import moment from 'moment'
 import {
 	ChatAgentProfile,
-  ChatBuble,
+  // ChatBuble,
   ChatContainer,
-  ReplyContainer,
-  ReplyBox,
-  ReplyButton,
+  // ReplyContainer,
+  // ReplyBox,
+  // ReplyButton,
 	Container,
 	MainContainer,
 	GeneralContainer,
 	SimpleContainer,
 } from './components/StyledComponents'
 
-import { Header, Drawer, AgentCard, LocationHeader  } from '../../components'
+import {
+	Header,
+	Drawer,
+	// AgentCard,
+	// LocationHeader
+} from '../../components'
 import { Link, withRouter } from 'react-router-dom'
 
 class Home extends Component {
 	state = {
     chats:[
 			{
-        "type": "agent",
-        "message": [
-            {
-                "id": "5a850e69d91ba376a58aea12",
-                "rating": 4,
-                "picture": "https://dl.airtable.com/Jn9N7DISQmL2OTo9ulOj_22175523.jpg",
-                "name": "Hepiska",
-                "city": "Jakarta",
-                "company": "Prudential Life Assurance"
-            },
-            {
-                "id": "5a850e69d91ba376a58aea12",
-                "rating": 4,
-                "picture": "https://dl.airtable.com/Jn9N7DISQmL2OTo9ulOj_22175523.jpg",
-                "name": "Hepiska",
-                "city": "Jakarta",
-                "company": "Prudential Life Assurance"
-            }
-        ],
+        "type": "text",
+        "message": 'Halo aku trisa aku adalah agent asuransi virtual yang di ciptakan untuk membantu kamu mencari agent yang terbaik dan menjawab pertanyaan kamu tentang asuransi',
         "sender": "bot"
     }
 		],
@@ -73,6 +61,7 @@ class Home extends Component {
 	}
 
 	setChatMessage = ({ key, target: { value: chatMessage } }) => {
+
 		if (chatMessage.length > 1) {
 			this.setState({
 				chatMessage
@@ -86,7 +75,9 @@ class Home extends Component {
 			})
 		}
 	}
-  
+	onSend = () => {
+		this.sendMessage(this.state.chatMessage)
+	}
 	sendMessage = async (chatMessage) =>{
 		moment.locale('id')
 		try {
@@ -153,7 +144,7 @@ class Home extends Component {
 												color={ chat.sender === 'bot' ? 'orange' : 'teal' }
 											>
 												<Card.Content>
-													<h4>{chat.sender}</h4>
+													<h4>{chat.sender === 'bot' ? 'Trisa' : 'me'}</h4>
 													{ Array.isArray(chat.message)
 														? chat.message.map((msg, idx) => (<Link key={idx} to={`profile/${msg.id}`}>
 															<ChatAgentProfile>
@@ -164,7 +155,7 @@ class Home extends Component {
 																<span> <Rating icon='star' defaultRating={msg.rating} maxRating={5} /></span>
 															</ChatAgentProfile>
 														</Link>))
-														: chat.message 
+														: chat.message
 													}
 												</Card.Content>
 												<Card.Description>
@@ -198,7 +189,7 @@ class Home extends Component {
 									icon: 'send',
 									content: 'Send',
 									size: 'huge',
-                  onClick: this.setChatMessage
+                  onClick: this.onSend
 								}}
 								style={{
 									width: '100%',
