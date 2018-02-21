@@ -102,7 +102,13 @@ class Home extends Component {
 				<Container name="Container">
 					<Drawer show={this.state.showDrawer} />
 					<MainContainer name="MainContainer">
-            <GeneralContainer name="ChatList">
+            <GeneralContainer
+							name="ChatList"
+							style={{
+								overflowY: 'scroll',
+								maxHeight: '77vh'
+							}}
+						>
 							<ChatContainer>
 								{chats.map((chat, index) => {
 									return (
@@ -139,10 +145,6 @@ class Home extends Component {
               padding="5px 0px"
               type='row'
 							backgroundColor='white'
-							style={{
-								position: 'fixed',
-								bottom: 0
-							}}
 						>
 							<Input
 								action={{
