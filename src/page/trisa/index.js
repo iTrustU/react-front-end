@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
-import { Loader, Button, Input, Card  } from 'semantic-ui-react'
+import {
+	Loader,
+	Button,
+	Input,
+	Card,
+	Rating
+} from 'semantic-ui-react'
 import axios from 'axios'
 import shortid from 'shortid'
 import { get } from '../../service'
 import moment from 'moment'
 import {
+	ChatAgentProfile,
   ChatBuble,
   ChatContainer,
   ReplyContainer,
@@ -17,11 +24,34 @@ import {
 } from './components/StyledComponents'
 
 import { Header, Drawer, AgentCard, LocationHeader  } from '../../components'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 class Home extends Component {
 	state = {
-    chats:[],
+    chats:[
+			{
+        "type": "agent",
+        "message": [
+            {
+                "id": "5a850e69d91ba376a58aea12",
+                "rating": 4,
+                "picture": "https://dl.airtable.com/Jn9N7DISQmL2OTo9ulOj_22175523.jpg",
+                "name": "Hepiska",
+                "city": "Jakarta",
+                "company": "Prudential Life Assurance"
+            },
+            {
+                "id": "5a850e69d91ba376a58aea12",
+                "rating": 4,
+                "picture": "https://dl.airtable.com/Jn9N7DISQmL2OTo9ulOj_22175523.jpg",
+                "name": "Hepiska",
+                "city": "Jakarta",
+                "company": "Prudential Life Assurance"
+            }
+        ],
+        "sender": "bot"
+    }
+		],
 		chatId: '',
 		chatMessage: ''
 	}
@@ -105,8 +135,7 @@ class Home extends Component {
             <GeneralContainer
 							name="ChatList"
 							style={{
-								overflowY: 'scroll',
-								maxHeight: '77vh'
+								marginBottom: '50px'
 							}}
 						>
 							<ChatContainer>
@@ -124,7 +153,19 @@ class Home extends Component {
 												color={ chat.sender === 'bot' ? 'orange' : 'teal' }
 											>
 												<Card.Content>
-													{ chat.message }
+													<h4>{chat.sender}</h4>
+													{ Array.isArray(chat.message)
+														? chat.message.map((msg, idx) => (<Link key={idx} to={`profile/${msg.id}`}>
+															<ChatAgentProfile>
+																<img src={msg.picture} />
+																<h3>{msg.name}</h3>
+																<p>From {msg.city}</p>
+																<p>Agent of <em>{msg.company}</em></p>
+																<span> <Rating icon='star' defaultRating={msg.rating} maxRating={5} /></span>
+															</ChatAgentProfile>
+														</Link>))
+														: chat.message 
+													}
 												</Card.Content>
 												<Card.Description>
 													<p style={{
@@ -145,6 +186,10 @@ class Home extends Component {
               padding="5px 0px"
               type='row'
 							backgroundColor='white'
+							style={{
+								position: 'fixed',
+								bottom: '0px'
+							}}
 						>
 							<Input
 								action={{

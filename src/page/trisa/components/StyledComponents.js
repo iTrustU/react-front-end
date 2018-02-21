@@ -91,3 +91,23 @@ export const ReplyButton = styled.button`
   background: #ccc;  
   color: #fff;
 `
+export const ChatAgentProfile = styled.div`
+	border: 0.8px solid #ccc;
+	margin-bottom: 5px;
+	padding: 10px;
+	color: #000;
+	
+	&:hover {
+		background: #f2711c;
+		color: #fff;
+		transition: background 0.4s;
+	}
+
+	img {
+		&:hover {
+			color: #fff;
+			background: #f2711c;
+		}
+		max-width: 100%;
+	}
+`
