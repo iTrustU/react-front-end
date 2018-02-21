@@ -19,7 +19,7 @@ import { withRouter } from 'react-router-dom'
 class Home extends Component {
 	state = {
 		showDrawer: false,
-		filterByCity:false,
+		filterByCity: false,
 		userCity:'',
 		location:'',
 		userData:[],
@@ -64,11 +64,18 @@ class Home extends Component {
 
 	changeFilterByCityStatus = () => {
 		const {location} = this.state
-		get({url:`profiles?filter[include][user]=insuranceCompany&where[location][near]=${location.lat},${location.lng}`})
+		this.setState({
+			filterByCity:!this.state.filterByCity
+		})
+		let url = 'profiles?filter[include][user]=insuranceCompany'
+		if (!this.state.filterByCity) {
+			url = `profiles?filter[include][user]=insuranceCompany&filter[where][location][near]=${location.lat},${location.lng}`
+		}
+		get({url})
 		.then(res => {
+			console.log(res);
 			this.setState({
-				userData:res.data,
-				filterByCity:!this.state.filterByCity
+				userData:res.data
 			})
 		}).catch(err => {
 			alert('sorry something wrong')

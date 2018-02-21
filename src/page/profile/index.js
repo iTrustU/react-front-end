@@ -50,7 +50,10 @@ class Profile extends Component {
 		this.getData(this.props.match.params.id)
 	}
 	shouldComponentUpdate(nextProps, nextState) {
-		return nextState.userData !== this.state.userData || nextState.update !== this.state.update
+		return nextState.showDrawer !== this.state.showDrawer ||
+		nextState.finalRating !== this.state.finalRating || 
+		nextState.userData !== this.state.userData ||
+		nextState.update !== this.state.update
 	}
 	componentDidUpdate(prevProps, prevState) {
 		if(prevState.update !== this.state.update){
