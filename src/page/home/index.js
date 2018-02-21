@@ -73,7 +73,6 @@ class Home extends Component {
 		}
 		get({url})
 		.then(res => {
-			console.log(res);
 			this.setState({
 				userData:res.data
 			})
