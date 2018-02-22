@@ -60,23 +60,18 @@ class Home extends Component {
 		})
 	}
 
-	setChatMessage = ({ key, target: { value: chatMessage } }) => {
-
-		if (chatMessage.length > 1) {
+	setChatMessage = (e, { value: chatMessage } )  => {
+		if (chatMessage.length ) {
 			this.setState({
 				chatMessage
-			}, () => {
-				if (key === 'Enter') {
-					this.sendMessage(this.state.chatMessage)
-					this.setState({
-						chatMessage: ''
-					})
-				}
 			})
 		}
 	}
 	onSend = () => {
 		this.sendMessage(this.state.chatMessage)
+		this.setState({
+			chatMessage:''
+		})
 	}
 	sendMessage = async (chatMessage) =>{
 		moment.locale('id')
@@ -196,7 +191,8 @@ class Home extends Component {
 									borderRadius: 20
 								}}
 								placeholder='Input text here'
-								onKeyUp={this.setChatMessage}
+								onChange={this.setChatMessage}
+								value={this.state.chatMessage}
 							/>
             </GeneralContainer>
 					</MainContainer>
